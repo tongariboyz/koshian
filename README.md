@@ -1,10 +1,8 @@
-# React Native Scroll View Sample to Flux
+# こしあん
 
 ## Description
 
-React Native Scroll View Sample to Flux.
-
-![](overview.gif)
+Koshian is [toggl](https://toggl.com/) client.
 
 ## Requirements
 
@@ -31,4 +29,4 @@ React Native Scroll View Sample to Flux.
   $ npm start
   ```
 
-3. Open & Run `ios/rnScrollViewSample.xcodeproj`
+3. Open & Run `ios/koshian.xcodeproj`
