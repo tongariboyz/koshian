@@ -1,0 +1,2 @@
+extends: kanmu/react
+parser: babel-eslint

@@ -1,0 +1,29 @@
+{
+  "name": "koshian",
+  "description": "koshian is toggl client.",
+  "version": "0.0.1",
+  "author": "TongariBoys",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-eslint": "^4.1.3",
+    "babel-runtime": "^5.8.25",
+    "eslint-config-kanmu": "^6.0.0",
+    "eslint-plugin-react": "^3.5.1"
+  },
+  "dependencies": {
+    "react-native": "^0.11.4",
+    "react-redux": "^3.1.0",
+    "redux": "^3.0.2"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tongariboys/koshian.git"
+  },
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "clean": "rm -rf dist",
+    "start": "node_modules/react-native/packager/packager.sh",
+    "watch": "babel src --watch --out-dir dist"
+  }
+}
