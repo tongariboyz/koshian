@@ -1,14 +1,18 @@
 import React from 'react-native';
-import {Text, View} from 'react-native';
 import {connect} from 'react-redux/native';
-import LoginPage from './LoginPage';
+import {login} from '../actions/login';
+import LoginForm from '../components/LoginForm';
 
 
-class App extends React.Component {
+class LoginPage extends React.Component {
 
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
     login: React.PropTypes.object.isRequired
+  }
+
+  onPressLogin = (username, password) => {
+    this.props.dispatch(login({username, password}));
   }
 
   /**
@@ -17,13 +21,12 @@ class App extends React.Component {
    * @return {ReactElement}
    */
   render() {
-    if (this.props.login.authToken === '') {
-      return <LoginPage />;
-    }
     return (
-      <View>
-        <Text>{this.props.login.authToken}</Text>
-      </View>
+      <LoginForm
+        isConnecting={this.props.login.isConnecting}
+        onPressLogin={this.onPressLogin}
+        token={this.props.login.authToken}
+      />
     );
   }
 }
@@ -38,4 +41,4 @@ function mapStateToProps(state) {
   return {login: state.login};
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(LoginPage);
