@@ -17,7 +17,12 @@
     "isparta": "^3.1.0",
     "mocha": "^2.3.3",
     "npm-run-all": "^1.2.12",
-    "power-assert": "^1.1.0"
+    "power-assert": "^1.1.0",
+    "proxyquire": "^1.7.3",
+    "react": "^0.14.0",
+    "react-addons-test-utils": "^0.14.0",
+    "react-shallow-testutils": "^0.6.0",
+    "sinon": "^1.17.1"
   },
   "dependencies": {
     "base64util": "^1.0.0",
