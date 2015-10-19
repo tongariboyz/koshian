@@ -1,7 +1,8 @@
 import React from 'react-native';
-import {Text, View} from 'react-native';
 import {connect} from 'react-redux/native';
 import LoginPage from './LoginPage';
+
+const {Text, View} = React;
 
 
 class App extends React.Component {

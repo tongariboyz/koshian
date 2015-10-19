@@ -1,6 +1,11 @@
 import React from 'react-native';
-import {ScrollView, StyleSheet, TextInput} from 'react-native';
 import NavButton from './NavButton';
+
+const {
+  ScrollView,
+  StyleSheet,
+  TextInput
+} = React;
 
 const SCROLL_EVENT_THROTTLE = 16;
 const FOCUS_FORM_SCROLL_VIEW_OFFSET = 20;
