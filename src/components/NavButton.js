@@ -1,5 +1,10 @@
 import React from 'react-native';
-import {PixelRatio, StyleSheet, TouchableHighlight, Text} from 'react-native';
+const {
+  PixelRatio,
+  StyleSheet,
+  TouchableHighlight,
+  Text
+} = React;
 
 const styles = StyleSheet.create({
   button: {

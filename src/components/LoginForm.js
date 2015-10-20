@@ -1,6 +1,15 @@
 import React from 'react-native';
-import {ScrollView, StyleSheet, TextInput} from 'react-native';
 import NavButton from './NavButton';
+
+const {
+  ScrollView,
+  StyleSheet,
+  TextInput
+} = React;
+
+const SCROLL_EVENT_THROTTLE = 16;
+const FOCUS_FORM_SCROLL_VIEW_OFFSET = 20;
+const FOCUS_FORM_WAIT_TIME = 50;
 
 const styles = StyleSheet.create({
   textInput: {
@@ -70,10 +79,10 @@ export default class LoginForm extends React.Component {
       const scrollResponder = this.refs.scrollView.getScrollResponder();
       scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
         React.findNodeHandle(this.refs[refName]),
-        20,
+        FOCUS_FORM_SCROLL_VIEW_OFFSET,
         true
       );
-    }, 50);
+    }, FOCUS_FORM_WAIT_TIME);
   }
 
   /**
@@ -119,7 +128,7 @@ export default class LoginForm extends React.Component {
         onTouchEnd={this.onTouchEnd}
         ref="scrollView"
         scrollEnabled={!this.state.isEditing}
-        scrollEventThrottle={16}
+        scrollEventThrottle={SCROLL_EVENT_THROTTLE}
         showsVerticalScrollIndicator={false}
         style={styles.view}
       >

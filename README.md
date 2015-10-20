@@ -1,5 +1,11 @@
 # こしあん
 
+[![Build Status][circleci-image]][circleci-url]
+[![Coverage Status][codecov-image]][codecov-url]
+[![Dependency Status][daviddm-image]][daviddm-url]
+[![DevDependency Status][daviddm-dev-image]][daviddm-dev-url]
+
+
 ## Description
 
 Koshian is [toggl](https://toggl.com/) client.
@@ -30,3 +36,13 @@ Koshian is [toggl](https://toggl.com/) client.
   ```
 
 3. Open & Run `ios/koshian.xcodeproj`
+
+
+[circleci-url]: https://circleci.com/gh/tongariboyz/koshian
+[circleci-image]: https://img.shields.io/circleci/project/tongariboyz/koshian/master.svg?style=flat-square
+[daviddm-url]: https://david-dm.org/tongariboyz/koshian
+[daviddm-image]: https://img.shields.io/david/tongariboyz/koshian.svg?style=flat-square
+[daviddm-dev-url]: https://david-dm.org/tongariboyz/koshian#info=devDependencies
+[daviddm-dev-image]: https://img.shields.io/david/dev/tongariboyz/koshian.svg?style=flat-square
+[codecov-url]: https://codecov.io/github/tongariboyz/koshian
+[codecov-image]: https://img.shields.io/codecov/c/github/tongariboyz/koshian.svg?style=flat-square
