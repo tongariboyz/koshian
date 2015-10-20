@@ -33,7 +33,7 @@ Koshian is [toggl](https://toggl.com/) client.
 
 ## Installation
 
-```vi
+```
 $ npm i
 ```
 
@@ -41,7 +41,7 @@ $ npm i
 ## Development
 
 1. Run server
-  ```vi
+  ```
   $ npm start
   ```
 
