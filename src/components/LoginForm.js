@@ -1,10 +1,13 @@
 import React from 'react-native';
-import NavButton from './NavButton';
+import zn from '../styles/zn';
 
 const {
   ScrollView,
   StyleSheet,
-  TextInput
+  TouchableHighlight,
+  Text,
+  TextInput,
+  View
 } = React;
 
 const SCROLL_EVENT_THROTTLE = 16;
@@ -12,17 +15,21 @@ const FOCUS_FORM_SCROLL_VIEW_OFFSET = 20;
 const FOCUS_FORM_WAIT_TIME = 50;
 
 const styles = StyleSheet.create({
-  textInput: {
-    height: 40,
-    borderColor: '#e0e0e0',
-    borderWidth: 1,
-    paddingLeft: 8,
-    paddingRight: 8,
-    margin: 20
+  button: zn.button,
+  buttonLabel: zn.buttonLabel,
+  symbol: {
+    alignSelf: 'center',
+    backgroundColor: zn.themeColor,
+    borderRadius: 25,
+    height: 50,
+    marginVertical: 80,
+    width: 50
   },
+  textInput: zn.form.line,
   view: {
-    backgroundColor: '#fff',
-    flex: 1
+    backgroundColor: zn.color.gray50,
+    flex: 1,
+    padding: 24
   }
 });
 
@@ -115,48 +122,74 @@ export default class LoginForm extends React.Component {
   }
 
   /**
+   * Form の props を返す
+   *
+   * @param {Object} props props
+   * @param {string} props.ref ref
+   * @param {string} [props.keyboardType] keyboardType
+   * @param {string} [props.placeholder] placeholder
+   * @param {boolean} [props.secureTextEntry] secureTextEntry
+   * @return {Object} props
+   */
+  getFormProps(props) {
+    return {
+      keyboardType: 'default',
+      onChangeText: t => this.onChangeText(props.ref, t),
+      onEndEditing: this.onEndEditing,
+      onFocus: this.onFocus.bind(this, props.ref),
+      style: styles.textInput,
+      value: this.state[props.ref],
+      ...props
+    };
+  }
+
+  /**
+   * ScrollView の props を返す
+   *
+   * @return {Object} props
+   */
+  getScrollViewProps() {
+    return {
+      keyboardDismissMode: 'on-drag',
+      keyboardShouldPersistTaps: false,
+      onScroll: this.onScroll,
+      onTouchEnd: this.onTouchEnd,
+      ref: 'scrollView',
+      scrollEnabled: !this.state.isEditing,
+      scrollEventThrottle: SCROLL_EVENT_THROTTLE,
+      showsVerticalScrollIndicator: false,
+      style: styles.view
+    };
+  }
+
+  /**
    * レンダリング
    *
    * @return {ReactElement}
    */
   render() {
     return (
-      <ScrollView
-        keyboardDismissMode="on-drag"
-        keyboardShouldPersistTaps={false}
-        onScroll={this.onScroll}
-        onTouchEnd={this.onTouchEnd}
-        ref="scrollView"
-        scrollEnabled={!this.state.isEditing}
-        scrollEventThrottle={SCROLL_EVENT_THROTTLE}
-        showsVerticalScrollIndicator={false}
-        style={styles.view}
-      >
-        <TextInput
-          keyboardType="email-address"
-          onChangeText={t => this.onChangeText('username', t)}
-          onEndEditing={this.onEndEditing}
-          onFocus={this.onFocus.bind(this, 'username')}
-          placeholder="Username"
-          ref="username"
-          style={styles.textInput}
-          value={this.state.user}
+      <ScrollView {...this.getScrollViewProps()}>
+        <View style={styles.symbol} />
+        <TextInput {...this.getFormProps({
+          keyboardType: 'email-address',
+          placeholder: 'Username',
+          ref: 'username'
+        })}
         />
-        <TextInput
-          keyboardType="default"
-          onChangeText={t => this.onChangeText('password', t)}
-          onEndEditing={this.onEndEditing}
-          onFocus={this.onFocus.bind(this, 'password')}
-          placeholder="Password"
-          ref="password"
-          secureTextEntry={true}
-          style={styles.textInput}
-          value={this.state.password}
+        <TextInput {...this.getFormProps({
+          placeholder: 'Password',
+          ref: 'password',
+          secureTextEntry: true
+        })}
         />
-        <NavButton
-          label="login"
+        <TouchableHighlight
           onPress={this.onPressLogin}
-        />
+          style={styles.button}
+          underlayColor={zn.color.blue600}
+        >
+          <Text style={styles.buttonLabel}>ログイン</Text>
+        </TouchableHighlight>
       </ScrollView>
     );
   }
