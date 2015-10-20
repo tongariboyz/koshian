@@ -1,8 +1,7 @@
 import React from 'react-native';
 import {connect} from 'react-redux/native';
 import LoginPage from './LoginPage';
-
-const {Text, View} = React;
+import IndexPage from './IndexPage';
 
 
 class App extends React.Component {
@@ -21,11 +20,7 @@ class App extends React.Component {
     if (this.props.login.authToken === '') {
       return <LoginPage />;
     }
-    return (
-      <View>
-        <Text>{this.props.login.authToken}</Text>
-      </View>
-    );
+    return <IndexPage />;
   }
 }
 
