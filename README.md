@@ -10,32 +10,49 @@
 
 Koshian is [toggl](https://toggl.com/) client.
 
+
 ## Requirements
 
 [React Native Getting Started](https://facebook.github.io/react-native/docs/getting-started.html)
 
 - **Requirements**
   * Install Node.js 4.0 or newer.
-  * Install npm v2.14.7 (in the case React-Native v0.11.0)
+  * Install npm v2.14.7
+    * In the case React-Native v0.11.x
+    * [React Dev Tools doesnot work v0.12.x or newer](https://github.com/facebook/react-native/issues/3373)
   * Install watchman newer
 
 - **iOS Setup**
   * Xcode 6.3 or higher is required.
 
+- **Chrome Setup**
+  * Install [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+  * Setup Chrome Developer Tools. Enable [Pause On Caught Exceptions](http://stackoverflow.com/questions/2233339/javascript-is-there-a-way-to-get-chrome-to-break-on-all-errors/17324511#17324511)
+
+
+
 ## Installation
 
-1. Install & Build
-  ```vi
-  $ npm i
-  $ npm run build
-  ```
+```vi
+$ npm i
+```
 
-2. Run server
+
+## Development
+
+1. Run server
   ```vi
   $ npm start
   ```
 
-3. Open & Run `ios/koshian.xcodeproj`
+2. Open Project & Run
+
+  - `$ open ios/koshian.xcodeproj`
+  - In the Xcode, Press `Cmd + r`
+  - In the Simulator, Press `Ctrl + Cmd + z` and select `Debug in Chrome`
+  - In the Google Chrome, Open Developer Tools and select `React` tab
+
+More detail, see [React Native Debugging Documents](https://facebook.github.io/react-native/docs/debugging.html#content)
 
 
 [circleci-url]: https://circleci.com/gh/tongariboyz/koshian
