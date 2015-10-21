@@ -30,8 +30,25 @@ export default class PeriodScrollView extends React.Component {
 
   static propTypes = {
     changePeriodViewIndex: React.PropTypes.func.isRequired,
+    changeViewPeriod: React.PropTypes.func.isRequired,
     dispatch: React.PropTypes.func.isRequired,
     period: React.PropTypes.object.isRequired
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {isMoving: false};
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.isMoving) {
+      this.setState({isMoving: false});
+      if (this.props.period.index < nextProps.period.index) {
+        this.props.dispatch(this.props.changeViewPeriod('next'));
+      } else if (this.props.period.index > nextProps.period.index) {
+        this.props.dispatch(this.props.changeViewPeriod('prev'));
+      }
+    }
   }
 
   /**
@@ -40,8 +57,17 @@ export default class PeriodScrollView extends React.Component {
    * @param {Event} e event
    */
   onMomentumScrollEnd = e => {
-    const x = e.nativeEvent.contentOffset.x;
-    this.props.dispatch(this.props.changePeriodViewIndex(x / width));
+    if (this.state.isMoving) {
+      const x = e.nativeEvent.contentOffset.x;
+      this.props.dispatch(this.props.changePeriodViewIndex(x / width));
+    }
+  }
+
+  /**
+   * 移動状態を変更
+   */
+  onTouchStart = () => {
+    this.setState({isMoving: true});
   }
 
   /**
@@ -67,6 +93,7 @@ export default class PeriodScrollView extends React.Component {
       contentOffset: this.getOffset(),
       horizontal: true,
       onMomentumScrollEnd: this.onMomentumScrollEnd,
+      onTouchStart: this.onTouchStart,
       pagingEnabled: true,
       ref: 'scrollView',
       scrollEventThrottle: SCROLL_EVENT_THROTTLE,
@@ -86,6 +113,7 @@ export default class PeriodScrollView extends React.Component {
       return (
         <View style={styles.view}>
           <Text style={styles.title}>{s.name}</Text>
+          <Text style={styles.title}>{s.date.toString()}</Text>
         </View>
       );
     });
