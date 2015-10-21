@@ -1,6 +1,9 @@
 import React from 'react-native';
 import {connect} from 'react-redux/native';
-import {changePeriodViewIndex} from '../actions/period';
+import {
+  changePeriodViewIndex,
+  changeViewPeriod
+} from '../actions/period';
 import PeriodScrollView from '../components/PeriodScrollView';
 
 const {View} = React;
@@ -23,6 +26,7 @@ class IndexPage extends React.Component {
       <View>
         <PeriodScrollView
           changePeriodViewIndex={changePeriodViewIndex}
+          changeViewPeriod={changeViewPeriod}
           dispatch={this.props.dispatch}
           period={this.props.period}
         />
