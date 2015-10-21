@@ -4,7 +4,7 @@ import zn from '../zn';
 const {height, width} = Dimensions.get('window');
 
 
-const styles = StyleSheet.create({
+const styles = {
   scrollView: {
     backgroundColor: zn.color.gray100
   },
@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20
   }
-});
+};
 
 export default styles;
