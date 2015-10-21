@@ -7,13 +7,20 @@ import {
 const INITIAL_CURRENT_DATE = new Date();
 const PERIOD_VIEW_LENGTH = 8;
 
+/**
+ * @typedef {Object} PeriodState
+ * @property {Date} state.currentDate 現在表示している期間の日付
+ * @property {number} state.distance 表示期間を変更する間隔
+ * @property {number} state.index 現在表示しているビュー番号
+ * @property {Object[]} state.stack 表示する期間のデータセット
+ */
 
 /**
  * 期間表示
  *
- * @param {Object} state state
+ * @param {PeriodState} state state
  * @param {Object} action action
- * @return {Object} state
+ * @return {PeriodState} state
  */
 export function period(state = {
   currentDate: INITIAL_CURRENT_DATE,
