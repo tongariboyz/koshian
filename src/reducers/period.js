@@ -54,15 +54,16 @@ export function period(state = {
  * 次に表示する期間を返す
  *
  * @param {Date} beforeCurrentDate beforeCurrentDate
- * @param {string} [direction] direction
  * @param {number} distance distance
+ * @param {Object} [opts] options
+ * @param {string} [opts.direction] direction
  * @return {Date} currentDate
  */
-function getNextCurrentDate(beforeCurrentDate, direction = null, distance) {
+function getNextCurrentDate(beforeCurrentDate, distance, opts = {}) {
   const currentDate = moment(beforeCurrentDate);
-  if (direction === 'prev') {
+  if (opts.direction === 'prev') {
     currentDate.subtract(distance, 'd');
-  } else if (direction === 'next') {
+  } else if (opts.direction === 'next') {
     currentDate.add(distance, 'd');
   }
   return new Date(currentDate.format());
