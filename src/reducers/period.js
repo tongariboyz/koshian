@@ -40,8 +40,8 @@ export function period(state = {
   case CHANGE_VIEW_PERIOD:
     const currentDate = getNextCurrentDate(
       state.currentDate,
-      action.payload.direction,
-      state.distance
+      state.distance,
+      {direction: action.payload.direction}
     );
     return Object.assign(
       {},
