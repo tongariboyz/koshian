@@ -9,11 +9,11 @@ const SCROLL_EVENT_THROTTLE = 16;
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: zn.color.gray50
+    backgroundColor: zn.color.gray100
   },
   view: {
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: zn.color.gray50,
     height,
     padding: 20,
     width
