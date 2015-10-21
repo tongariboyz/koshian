@@ -7,7 +7,7 @@ import {
  * PeriodScrollView の表示中の index を変更
  *
  * @param {number} index index
- * @return {function}
+ * @return {Object}
  */
 export function changePeriodViewIndex(index) {
   return {
@@ -19,8 +19,8 @@ export function changePeriodViewIndex(index) {
 /**
  * 表示する期間を変更
  *
- * @param {number} direction direction
- * @return {function}
+ * @param {string} direction direction
+ * @return {Object}
  */
 export function changeViewPeriod(direction) {
   return {
