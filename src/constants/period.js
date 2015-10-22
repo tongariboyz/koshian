@@ -1,2 +1,6 @@
-export const CHANGE_PERIOD_VIEW_INDEX = 'CHANGE_PERIOD_VIEW_INDEX';
-export const CHANGE_VIEW_PERIOD = 'CHANGE_VIEW_PERIOD';
+import uniqueActionTypes from '../helpers/uniqueActionTypes';
+
+
+export default uniqueActionTypes('PERIOD/', [
+  'CHANGE_PERIOD_VIEW_INDEX', 'CHANGE_VIEW_PERIOD'
+]);
