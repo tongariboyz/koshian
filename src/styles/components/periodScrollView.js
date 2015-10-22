@@ -12,7 +12,11 @@ const styles = {
     alignItems: 'center',
     backgroundColor: zn.color.gray50,
     height,
-    padding: 20,
+    width,
+    overflow: 'hidden'
+  },
+  listScrollView: {
+    top: 80,
     width
   },
   title: {
