@@ -3,12 +3,18 @@ import {connect} from 'react-redux/native';
 import LoginPage from './LoginPage';
 import IndexPage from './IndexPage';
 
+const {StatusBarIOS} = React;
+
 
 class App extends React.Component {
 
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
     login: React.PropTypes.object.isRequired
+  }
+
+  componentDidMount() {
+    StatusBarIOS.setHidden(true);
   }
 
   /**
