@@ -6,6 +6,12 @@ import {color} from './constants';
 const zn = {
   color,
   themeColor: '#5a4a4a',
+  typo: {
+    color: color.gray900,
+    fontSize: 16,
+    fontFamily: 'Avenir',
+    letterSpacing: 0.4
+  },
   button: {
     flex: 1,
     alignItems: 'center',
