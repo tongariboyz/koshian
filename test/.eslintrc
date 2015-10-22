@@ -2,3 +2,4 @@ env:
   mocha: true
 rules:
   max-nested-callbacks: [1, 12]
+  no-magic-numbers: 0
