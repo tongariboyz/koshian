@@ -4,6 +4,7 @@ import {
   changePeriodViewIndex,
   changeViewPeriod
 } from '../actions/period';
+import TimerFormView from './TimerFormView';
 import PeriodScrollView from '../components/PeriodScrollView';
 
 const {View} = React;
@@ -30,6 +31,7 @@ class IndexPage extends React.Component {
           dispatch={this.props.dispatch}
           period={this.props.period}
         />
+        <TimerFormView />
       </View>
     );
   }

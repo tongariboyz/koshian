@@ -1,29 +1,11 @@
 import React from 'react-native';
 import Dimensions from 'Dimensions';
-import zn from '../styles/zn';
+import styles from '../styles/components/periodScrollView';
 
-const {ScrollView, StyleSheet, Text, View} = React;
-const {height, width} = Dimensions.get('window');
+const {ScrollView, Text, View} = React;
+const {width} = Dimensions.get('window');
 
 const SCROLL_EVENT_THROTTLE = 16;
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: zn.color.gray50
-  },
-  view: {
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    height,
-    padding: 20,
-    width
-  },
-  title: {
-    fontSize: 20,
-    paddingTop: 20,
-    paddingBottom: 20
-  }
-});
 
 
 export default class PeriodScrollView extends React.Component {
