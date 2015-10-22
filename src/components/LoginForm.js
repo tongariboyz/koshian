@@ -38,8 +38,7 @@ export default class LoginForm extends React.Component {
 
   static propTypes = {
     isConnecting: React.PropTypes.bool.isRequired,
-    onPressLogin: React.PropTypes.func.isRequired,
-    token: React.PropTypes.string.isRequired
+    onPressLogin: React.PropTypes.func.isRequired
   }
 
   constructor(props) {

@@ -1,3 +1,4 @@
+import TogglAPIClient from '../helpers/TogglAPIClient';
 import {
   RECEIVE_TOKEN,
   REQUEST_TOKEN
@@ -12,16 +13,21 @@ import {
  * @return {Object} state
  */
 export function auth(state = {
-  authToken: getTokenFromStorage(),
+  client: null,
   isConnecting: false
 }, action) {
   switch (action.type) {
   case RECEIVE_TOKEN:
+    if (action.error) {
+      console.error(action.payload);
+      break;
+    }
+    const token = action.payload.body.data.api_token;
     return Object.assign(
       {},
       state,
       {
-        authToken: action.token,
+        client: new TogglAPIClient(token),
         isConnecting: false
       }
     );

@@ -1,6 +1,8 @@
 import {
   CHANGE_PERIOD_VIEW_INDEX,
-  CHANGE_VIEW_PERIOD
+  CHANGE_VIEW_PERIOD,
+  INITIALIZE_PERIOD_VIEW_INDEX,
+  RESPONSE_PERIOD_TIME_ENTRIES
 } from '../constants/period';
 
 /**
@@ -26,5 +28,18 @@ export function changeViewPeriod(direction) {
   return {
     type: CHANGE_VIEW_PERIOD,
     payload: {direction}
+  };
+}
+
+
+export function initializePeriodViewIndex() {
+  return {
+    type: INITIALIZE_PERIOD_VIEW_INDEX,
+    meta: {
+      client: {
+        type: RESPONSE_PERIOD_TIME_ENTRIES,
+        next: client => client.getTimeEntries()
+      }
+    }
   };
 }
