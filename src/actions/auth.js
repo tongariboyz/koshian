@@ -1,6 +1,6 @@
 import request from 'superagent';
 import Base64 from 'base64util';
-import * as types from '../constants/login';
+import * as types from '../constants/authActionTypes';
 
 /**
  * APIToken リクエストを実行

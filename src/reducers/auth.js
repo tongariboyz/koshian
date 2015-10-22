@@ -1,7 +1,7 @@
 import {
   RECEIVE_TOKEN,
   REQUEST_TOKEN
-} from '../constants/login';
+} from '../constants/authActionTypes';
 
 
 /**
@@ -11,7 +11,7 @@ import {
  * @param {Object} action action
  * @return {Object} state
  */
-export function login(state = {
+export function auth(state = {
   authToken: getTokenFromStorage(),
   isConnecting: false
 }, action) {
