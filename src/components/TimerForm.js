@@ -3,8 +3,8 @@ import yugo from 'yugo';
 import {EASE_KEY_OPEN, EASE_OUT_EXPO} from '../constants/easing';
 import KeyboardChangeButtons from './KeyboardChangeButtons';
 import styles from '../styles/components/timerForm';
-import {FORM_HEIGHT} from '../styles/components/timerForm';
 
+const KEYBOARD_CHANGE_BUTTONS_HEIGHT = 32;
 const {
   Animated,
   Easing,
@@ -48,7 +48,7 @@ export default class TimerForm extends React.Component {
     Animated.timing(this.state.pan, {
       easing: Easing.bezier(...EASE_KEY_OPEN),
       duration: 300,
-      toValue: {x: 0, y: -(frames.endCoordinates.height + FORM_HEIGHT)}
+      toValue: {x: 0, y: -(frames.endCoordinates.height + KEYBOARD_CHANGE_BUTTONS_HEIGHT)}
     }).start();
   }
 

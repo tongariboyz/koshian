@@ -3,7 +3,7 @@ import yugo from 'yugo';
 import zn from '../zn';
 
 const {height, width} = Dimensions.get('window');
-export const FORM_HEIGHT = 50;
+const FORM_HEIGHT = 50;
 
 const styles = {
   view: {
