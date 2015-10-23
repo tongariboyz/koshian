@@ -1,9 +1,7 @@
-import React from 'react-native';
 import Dimensions from 'Dimensions';
 import yugo from 'yugo';
 import zn from '../zn';
 
-const {PixelRatio} = React;
 const {height, width} = Dimensions.get('window');
 export const FORM_HEIGHT = 50;
 
@@ -21,14 +19,15 @@ const styles = {
     top: 0
   },
   animatedView: {
-    borderTopWidth: 1 / PixelRatio.get(),
-    borderTopColor: zn.color.gray200,
     backgroundColor: '#fff',
     flex: 1,
     position: 'absolute',
     height,
     bottom: -(height - FORM_HEIGHT),
-    width
+    width,
+    shadowColor: zn.color.gray300,
+    shadowOpacity: 0.8,
+    shadowOffset: {height: 0, width: 0}
   },
   textInput: yugo(zn.form.line, {fontSize: 14, borderWidth: 0})
 };
