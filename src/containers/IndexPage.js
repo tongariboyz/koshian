@@ -2,7 +2,8 @@ import React from 'react-native';
 import {connect} from 'react-redux/native';
 import {
   changePeriodViewIndex,
-  changeViewPeriod
+  changeViewPeriod,
+  initializePeriodViewIndex
 } from '../actions/period';
 import TimerFormView from './TimerFormView';
 import PeriodScrollView from '../components/PeriodScrollView';
@@ -15,6 +16,10 @@ class IndexPage extends React.Component {
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
     period: React.PropTypes.object.isRequired
+  }
+
+  componentWillMount() {
+    this.props.dispatch(initializePeriodViewIndex(this.props.period.currentDate));
   }
 
   /**

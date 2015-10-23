@@ -2,10 +2,6 @@ import React from 'react-native';
 import {connect} from 'react-redux/native';
 import LoginPage from './LoginPage';
 import IndexPage from './IndexPage';
-import {
-  initializePeriodViewIndex
-} from '../actions/period';
-
 
 const {StatusBarIOS} = React;
 
@@ -15,13 +11,6 @@ class App extends React.Component {
   static propTypes = {
     auth: React.PropTypes.object.isRequired,
     dispatch: React.PropTypes.func.isRequired
-  }
-  componentWillReceiveProps(nextProps) {
-    if (this.props.auth.client === null) {
-      if (nextProps.auth.client) {
-        this.props.dispatch(initializePeriodViewIndex());
-      }
-    }
   }
 
   componentDidMount() {
