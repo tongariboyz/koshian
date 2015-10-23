@@ -79,7 +79,8 @@ describe('helpers/TogglAPIClient', () => {
       it('headers に api_token を含む', () => {
         mockServer.get('/dummy').reply(200, {dummy: 'dummy'});
         return apiClient.get('/dummy').then(ret => {
-          assert(ret.request.headers[dummyAPIToken] === 'api_token');
+          const token = 'Basic ZHVtbXlfdG9rZW46YXBpX3Rva2Vu';
+          assert(ret.request.headers.Authorization === token);
         });
       });
     });

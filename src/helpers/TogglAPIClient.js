@@ -10,6 +10,12 @@ import {
 } from '../constants/togglAPI';
 
 
+function createBasicAuthHeader(username, password) {
+  const query = `${username}:${password}`;
+  return {Authorization: `Basic ${Base64.encode(query)}`};
+}
+
+
 export default class TogglAPIClient {
 
   /**
@@ -72,10 +78,7 @@ export default class TogglAPIClient {
    * @return {Promise}
    */
   static login(username, password) {
-    const query = `${username}:${password}`;
-    return this.get('/me', {headers: {
-      Authorization: `Basic ${Base64.encode(query)}`
-    }});
+    return this.get('/me', {headers: createBasicAuthHeader(username, password)});
   }
 }
 
@@ -83,9 +86,13 @@ export default class TogglAPIClient {
 API_METHODS.forEach(method => {
   TogglAPIClient[method] = function method2(path, opts = {}) {
     let req = request[method](`${API_ENDPOINT}${path}`);
-    const headers = opts.headers || {};
+    let headers = opts.headers || {};
     if (this.apiToken) {
-      headers[this.apiToken] = 'api_token';
+      headers = Object.assign(
+        {},
+        createBasicAuthHeader(this.apiToken, 'api_token'),
+        headers
+      );
     }
     Object.keys(headers).forEach(key => {
       req = req.set(key, headers[key]);
