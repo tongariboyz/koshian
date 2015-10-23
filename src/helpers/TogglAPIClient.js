@@ -63,7 +63,7 @@ export default class TogglAPIClient {
    * @param {Object} timeEntry timeentry
    * @return {Promise}
    */
-  createTimeEntriy(timeEntry) {
+  createTimeEntry(timeEntry) {
     return this.post('/time_entries', {data: timeEntry});
   }
 

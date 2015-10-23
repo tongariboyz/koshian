@@ -7,7 +7,7 @@ import moment from 'moment';
  * 開始日時を日 (Date) に直して指定間隔後の日とあわせて返す
  *
  * @param {Date} currentDate 開始日時
- * @param {number} duration 間隔
+ * @param {number} [duration] 間隔
  * @return {Date[]}
  */
 export function getPeriodDates(currentDate, duration = 1) {
