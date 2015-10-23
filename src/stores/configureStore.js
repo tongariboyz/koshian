@@ -11,8 +11,8 @@ const logger = createLogger({predicate: () => __DEV__});
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware,
   promiseMiddleware,
-  logger,
-  clientMiddleware
+  clientMiddleware,
+  logger
 )(createStore);
 
 /**
