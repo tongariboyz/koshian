@@ -1,10 +1,12 @@
 import moment from 'moment';
 import {
   CHANGE_PERIOD_VIEW_INDEX,
-  CHANGE_VIEW_PERIOD
+  CHANGE_VIEW_PERIOD,
+  RESPONSE_PERIOD_TIME_ENTRIES
 } from '../constants/period';
+import {createTimeEntryKey} from '../helpers/dateUtils';
 
-const INITIAL_CURRENT_DATE = new Date();
+const INITIAL_CURRENT_DATE = moment().startOf('day').toDate();
 const PERIOD_VIEW_LENGTH = 8;
 
 /**
@@ -13,6 +15,7 @@ const PERIOD_VIEW_LENGTH = 8;
  * @property {number} state.distance 表示期間を変更する間隔
  * @property {number} state.index 現在表示しているビュー番号
  * @property {Object[]} state.stack 表示する期間のデータセット
+ * @property {Object} state.timeEntries 日付文字列をキーにしたTimeEntryの配列
  */
 
 /**
@@ -25,6 +28,7 @@ const PERIOD_VIEW_LENGTH = 8;
 export function period(state = {
   currentDate: INITIAL_CURRENT_DATE,
   distance: 0,
+  timeEntries: {},
   index: PERIOD_VIEW_LENGTH,
   stack: getViewPeriods(INITIAL_CURRENT_DATE)
 }, action) {
@@ -51,6 +55,20 @@ export function period(state = {
         index: PERIOD_VIEW_LENGTH,
         stack: getViewPeriods(currentDate)
       }
+    );
+  case RESPONSE_PERIOD_TIME_ENTRIES:
+    // FIXME: 一旦格納方法は適当
+    const query = action.payload.request.query;
+    const key = createTimeEntryKey(query.start_date);
+    const timeEntries = Object.assign(
+      {},
+      state.timeEntries,
+      {[key]: action.payload.body}
+    );
+    return Object.assign(
+      {},
+      state,
+      {timeEntries}
     );
   default:
     return state;

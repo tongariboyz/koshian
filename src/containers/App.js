@@ -9,8 +9,8 @@ const {StatusBarIOS} = React;
 class App extends React.Component {
 
   static propTypes = {
-    dispatch: React.PropTypes.func.isRequired,
-    login: React.PropTypes.object.isRequired
+    auth: React.PropTypes.object.isRequired,
+    dispatch: React.PropTypes.func.isRequired
   }
 
   componentDidMount() {
@@ -23,7 +23,7 @@ class App extends React.Component {
    * @return {ReactElement}
    */
   render() {
-    if (this.props.login.authToken === '') {
+    if (this.props.auth.client === null) {
       return <LoginPage />;
     }
     return <IndexPage />;
@@ -37,7 +37,7 @@ class App extends React.Component {
  * @return {Object}
  */
 function mapStateToProps(state) {
-  return {login: state.login};
+  return {auth: state.auth};
 }
 
 export default connect(mapStateToProps)(App);

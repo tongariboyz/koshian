@@ -1,6 +1,5 @@
-import request from 'superagent';
-import Base64 from 'base64util';
-import * as types from '../constants/login';
+import TogglAPIClient from '../helpers/TogglAPIClient';
+import * as types from '../constants/authActionTypes';
 
 /**
  * APIToken リクエストを実行
@@ -12,17 +11,9 @@ import * as types from '../constants/login';
  */
 function getToken(userData) {
   return dispatch => {
+    const promise = TogglAPIClient.login(userData.username, userData.password);
     dispatch(requestToken());
-    const query = `${userData.username}:${userData.password}`;
-    return request.get('https://www.toggl.com/api/v8/me')
-      .set('Authorization', `Basic ${Base64.encode(query)}`)
-      .end((err, res) => {
-        if (err) {
-          console.log(err);
-        } else {
-          dispatch(receiveToken(res.body.data.api_token));
-        }
-      });
+    dispatch(receiveToken(promise));
   };
 }
 
@@ -41,17 +32,17 @@ export function login(userData) {
 }
 
 /**
- * APIToken 取得成功時の処理
+ * APIToken リクエスト完了時の処理
  *
- * @param {string} token token
+ * @param {Promise} client TogglAPIClient.login の戻り値
  * @return {Object} action
  */
-export function receiveToken(token) {
-  return {type: types.RECEIVE_TOKEN, token};
+export function receiveToken(client) {
+  return {type: types.RECEIVE_TOKEN, payload: client};
 }
 
 /**
- * APIToken リクエスト完了時の処理
+ * APIToken リクエスト開始時の処理
  *
  * @return {Object} action
  */

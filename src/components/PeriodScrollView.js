@@ -2,6 +2,7 @@ import React from 'react-native';
 import Dimensions from 'Dimensions';
 import styles from '../styles/components/periodScrollView';
 import RecordsHeader from '../components/RecordsHeader';
+import {createTimeEntryKey} from '../helpers/dateUtils';
 
 const {ScrollView, Text, View} = React;
 const {width} = Dimensions.get('window');
@@ -93,6 +94,8 @@ export default class PeriodScrollView extends React.Component {
    */
   renderViews() {
     return this.props.period.stack.map(s => {
+      const key = createTimeEntryKey(s.date);
+      const timeEntries = this.props.period.timeEntries[key] || [];
       return (
         <View style={styles.view}>
           <ScrollView
@@ -100,6 +103,7 @@ export default class PeriodScrollView extends React.Component {
           >
             <Text style={styles.title}>{s.name}</Text>
             <Text style={styles.title}>{s.date.toString()}</Text>
+            {timeEntries.map(e => (<Text>{e.description}</Text>))}
           </ScrollView>
           <RecordsHeader
             date={s.date}
