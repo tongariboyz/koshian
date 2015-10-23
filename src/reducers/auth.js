@@ -41,12 +41,3 @@ export function auth(state = {
     return state;
   }
 }
-
-/**
- * ストレージからトークンを取得
- *
- * @return {string} Token
- */
-function getTokenFromStorage() {
-  return '';
-}

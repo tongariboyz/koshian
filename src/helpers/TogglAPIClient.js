@@ -10,6 +10,13 @@ import {
 } from '../constants/togglAPI';
 
 
+/**
+ * username/passwordからBasicAuth用のヘッダオブジェクトを作成
+ *
+ * @param {string} username username
+ * @param {string} password password
+ * @return {Object}
+ */
 function createBasicAuthHeader(username, password) {
   const query = `${username}:${password}`;
   return {Authorization: `Basic ${Base64.encode(query)}`};
