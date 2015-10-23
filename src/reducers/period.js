@@ -60,7 +60,7 @@ export function period(state = {
     // FIXME: 一旦格納方法は適当
     const query = action.payload.request.query;
     const key = createTimeEntryKey(query.start_date);
-    const newEntries = Object.assign(
+    const timeEntries = Object.assign(
       {},
       state.timeEntries,
       {[key]: action.payload.body}
@@ -68,7 +68,7 @@ export function period(state = {
     return Object.assign(
       {},
       state,
-      {timeEntries: newEntries}
+      {timeEntries}
     );
   default:
     return state;
