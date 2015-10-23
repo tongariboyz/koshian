@@ -2,6 +2,7 @@ import React from 'react-native';
 import yugo from 'yugo';
 import {EASE_KEY_OPEN, EASE_OUT_EXPO} from '../constants/easing';
 import KeyboardChangeButtons from './KeyboardChangeButtons';
+import zn from '../styles/zn';
 import styles from '../styles/components/timerForm';
 
 const KEYBOARD_CHANGE_BUTTONS_HEIGHT = 32;
@@ -9,6 +10,8 @@ const {
   Animated,
   Easing,
   DeviceEventEmitter,
+  TouchableHighlight,
+  Text,
   TextInput,
   View
 } = React;
@@ -148,7 +151,16 @@ export default class TimerForm extends React.Component {
           onTouchStart={this.onTouchStartForm}
           style={yugo(styles.animatedView, {transform: this.state.pan.getTranslateTransform()})}
         >
-          <TextInput {...this.getFormProps()} />
+          <View style={styles.formWrapper}>
+            <TextInput {...this.getFormProps()} />
+            <TouchableHighlight
+              onPress={this.onPressLogin}
+              style={styles.startButton}
+              underlayColor={zn.color.blue600}
+            >
+              <Text style={styles.startButtonLabel}>START</Text>
+            </TouchableHighlight>
+          </View>
           <KeyboardChangeButtons
             keyboardType={this.state.keyboardType}
             onPressButton={this.onPressButton.bind(this)}
