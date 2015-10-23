@@ -1,5 +1,6 @@
 /* eslint camelcase: 0 */
 import assert from 'power-assert';
+import moment from 'moment';
 import nock from 'nock';
 import {API_ENDPOINT} from '../../src/constants/togglAPI';
 import proxyquire from 'proxyquire';
@@ -58,16 +59,16 @@ describe('helpers/TogglAPIClient', () => {
     });
 
     it('#getTimeEntries()', () => {
-      const start = '2015-09-08T00:00:00+09:00';
-      const end = '2015-09-09T00:00:00+09:00';
-      const ret = apiClient.getTimeEntries(new Date(start), new Date(end));
+      const start = new Date('2015-09-08');
+      const end = new Date('2015-09-09');
+      const ret = apiClient.getTimeEntries(start, end);
       assert(ret === stubRets.ins.get);
       assert(stubs.ins.get.args.length === 1);
       assert.deepEqual(stubs.ins.get.args[0], [
         '/time_entries', {
           query: {
-            start_date: start,
-            end_date: end
+            start_date: moment(start).format('YYYY-MM-DDTHH:mm:ssZ'),
+            end_date: moment(end).format('YYYY-MM-DDTHH:mm:ssZ')
           }
         }
       ]);
