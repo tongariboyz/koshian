@@ -3,7 +3,12 @@ import {connect} from 'react-redux/native';
 import LoginPage from './LoginPage';
 import IndexPage from './IndexPage';
 
-const {StatusBarIOS} = React;
+import {
+  restoreToken,
+  saveTokenIfNeeded
+} from '../actions/auth';
+
+const {StatusBarIOS, View, Text} = React;
 
 
 class App extends React.Component {
@@ -14,7 +19,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.props.dispatch(restoreToken());
     StatusBarIOS.setHidden(true);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // client がセットされたタイミングで必要があれば AuthToken をストレージに保存
+    if (this.props.auth.client === null && nextProps.auth.client !== null) {
+      this.props.dispatch(saveTokenIfNeeded(nextProps.auth.client.apiToken));
+    }
   }
 
   /**
@@ -23,10 +36,17 @@ class App extends React.Component {
    * @return {ReactElement}
    */
   render() {
-    if (this.props.auth.client === null) {
-      return <LoginPage />;
+    if (!this.props.auth.isRestored) {
+      // FIXME: ちゃんとしたローディングページを
+      return (
+        <View>
+          <Text>Initializing...</Text>
+        </View>
+      );
+    } else if (this.props.auth.client) {
+      return <IndexPage />;
     }
-    return <IndexPage />;
+    return <LoginPage />;
   }
 }
 

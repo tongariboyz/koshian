@@ -1,5 +1,6 @@
 import React from 'react-native';
 import {connect} from 'react-redux/native';
+import {logout} from '../actions/auth';
 import {
   changePeriodViewIndex,
   changeViewPeriod,
@@ -8,7 +9,7 @@ import {
 import TimerFormView from './TimerFormView';
 import PeriodScrollView from '../components/PeriodScrollView';
 
-const {View} = React;
+const {View, Text} = React;
 
 
 class IndexPage extends React.Component {
@@ -22,6 +23,21 @@ class IndexPage extends React.Component {
     this.props.dispatch(initializePeriodViewIndex(this.props.period.currentDate));
   }
 
+  onPressLogoutBtn = () => {
+    this.props.dispatch(logout());
+  }
+
+  /**
+   * FIXME: 仮ログアウトボタンをレンダリング
+   *
+   * @return {ReactElement}
+   */
+  renderLogoutBtn() {
+    return (
+      <Text onPress={this.onPressLogoutBtn}>Logout</Text>
+    );
+  }
+
   /**
    * レンダリング
    *
@@ -30,6 +46,7 @@ class IndexPage extends React.Component {
   render() {
     return (
       <View>
+        {this.renderLogoutBtn()}
         <PeriodScrollView
           changePeriodViewIndex={changePeriodViewIndex}
           changeViewPeriod={changeViewPeriod}
