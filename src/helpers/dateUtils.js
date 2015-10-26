@@ -1,3 +1,4 @@
+/* @flow */
 import moment from 'moment';
 
 
@@ -10,7 +11,7 @@ import moment from 'moment';
  * @param {number} [duration] 間隔
  * @return {Date[]}
  */
-export function getPeriodDates(currentDate, duration = 1) {
+export function getPeriodDates(currentDate: Date, duration: number = 1): Date[] {
   const start = moment(currentDate).startOf('day');
   const end = start.clone().add(duration, 'd');
   return [start.toDate(), end.toDate()];
@@ -23,6 +24,6 @@ export function getPeriodDates(currentDate, duration = 1) {
  * @param {Date|string} date 対象日時
  * @return {string}
  */
-export function createTimeEntryKey(date) {
+export function createTimeEntryKey(date: (Date|string)): string {
   return moment(date).format('YYYYMMDD');
 }

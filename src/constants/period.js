@@ -1,3 +1,4 @@
+/* @flow */
 import uniqueActionTypes from '../helpers/uniqueActionTypes';
 
 

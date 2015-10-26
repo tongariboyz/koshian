@@ -1,3 +1,4 @@
+/* @flow */
 import {AsyncStorage} from 'react-native';
 
 
@@ -7,7 +8,7 @@ import {AsyncStorage} from 'react-native';
  * @param {string} key キー
  * @return {Promise}
  */
-export function getItem(key) {
+export function getItem(key: string): Promise {
   return AsyncStorage.getItem(key);
 }
 
@@ -18,7 +19,7 @@ export function getItem(key) {
  * @param {string} key キー
  * @return {Promise}
  */
-export function removeItem(key) {
+export function removeItem(key: string): Promise {
   return AsyncStorage.removeItem(key);
 }
 
@@ -30,7 +31,7 @@ export function removeItem(key) {
  * @param {string} value 値
  * @return {Promise}
  */
-export function setItem(key, value) {
+export function setItem(key: string, value: string): Promise {
   return AsyncStorage.setItem(key, value);
 }
 

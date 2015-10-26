@@ -1,10 +1,14 @@
+/* @flow */
 /**
  * API クライアント実行ミドルウェア
  *
  * @param {function} getState getState
  * @return {function}
  */
-export default function clientMiddleware({dispatch, getState}) {
+export default function clientMiddleware({dispatch, getState}: {
+  dispatch: Function,
+  getState: Function
+}): Function {
   return next => action => {
     const state = getState();
     if (action.meta && action.meta.client) {

@@ -1,10 +1,12 @@
-import {
-  CHANGE_PERIOD_VIEW_INDEX,
-  CHANGE_VIEW_PERIOD,
-  INITIALIZE_PERIOD_VIEW_INDEX,
-  RESPONSE_PERIOD_TIME_ENTRIES
-} from '../constants/period';
+/* @flow */
+import types from '../constants/period';
 import {getPeriodDates} from '../helpers/dateUtils';
+
+type Action = {
+  type: string,
+  payload: any
+};
+
 
 /**
  * PeriodScrollView の表示中の index を変更
@@ -12,9 +14,9 @@ import {getPeriodDates} from '../helpers/dateUtils';
  * @param {number} index index
  * @return {Object}
  */
-export function changePeriodViewIndex(index) {
+export function changePeriodViewIndex(index: number): Action {
   return {
-    type: CHANGE_PERIOD_VIEW_INDEX,
+    type: types.CHANGE_PERIOD_VIEW_INDEX,
     payload: {index}
   };
 }
@@ -25,9 +27,9 @@ export function changePeriodViewIndex(index) {
  * @param {string} direction direction
  * @return {Object}
  */
-export function changeViewPeriod(direction) {
+export function changeViewPeriod(direction: string): Action {
   return {
-    type: CHANGE_VIEW_PERIOD,
+    type: types.CHANGE_VIEW_PERIOD,
     payload: {direction}
   };
 }
@@ -39,13 +41,21 @@ export function changeViewPeriod(direction) {
  * @param {Date} currentDate 現在表示対象の日時
  * @return {Object}
  */
-export function initializePeriodViewIndex(currentDate) {
+export function initializePeriodViewIndex(currentDate: Date): {
+  type: string,
+  meta: {
+    client: {
+      type: string,
+      next: Function
+    }
+  }
+} {
   const [start, end] = getPeriodDates(currentDate, 1);
   return {
-    type: INITIALIZE_PERIOD_VIEW_INDEX,
+    type: types.INITIALIZE_PERIOD_VIEW_INDEX,
     meta: {
       client: {
-        type: RESPONSE_PERIOD_TIME_ENTRIES,
+        type: types.RESPONSE_PERIOD_TIME_ENTRIES,
         next: client => client.getTimeEntries(start, end)
       }
     }

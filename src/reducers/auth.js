@@ -1,10 +1,16 @@
+/* @flow */
 import TogglAPIClient from '../helpers/TogglAPIClient';
-import {
-  LOGOUT,
-  RECEIVE_TOKEN,
-  RESTORE_TOKEN,
-  REQUEST_TOKEN
-} from '../constants/authActionTypes';
+import types from '../constants/authActionTypes';
+
+type Action = {
+  type: string,
+  payload: Object
+};
+type State = {
+  client: TogglAPIClient,
+  isConnecting: boolean,
+  isRestored: boolean
+};
 
 
 /**
@@ -14,15 +20,15 @@ import {
  * @param {Object} action action
  * @return {Object} state
  */
-export function auth(state = {
+export function auth(state: State = {
   client: null,
   isConnecting: false,
   isRestored: false
-}, action) {
+}, action: Action): State {
   switch (action.type) {
-  case LOGOUT:
+  case types.LOGOUT:
     return Object.assign({}, state, {client: null});
-  case RECEIVE_TOKEN:
+  case types.RECEIVE_TOKEN:
     if (action.error) {
       console.error(action.payload);
       break;
@@ -36,13 +42,13 @@ export function auth(state = {
         isConnecting: false
       }
     );
-  case REQUEST_TOKEN:
+  case types.REQUEST_TOKEN:
     return Object.assign(
       {},
       state,
       {isConnecting: true}
     );
-  case RESTORE_TOKEN:
+  case types.RESTORE_TOKEN:
     return restoreToken(state, action);
   default:
     return state;
@@ -57,12 +63,12 @@ export function auth(state = {
  * @param {Object} action action
  * @return {Object}
  */
-export function restoreToken(state, action) {
+export function restoreToken(state: State, action: Action): State {
   if (action.error) {
     console.error(action.payload);
     return state;
   }
-  const newState = {isRestored: true};
+  const newState: Object = {isRestored: true};
   if (action.payload) {
     newState.client = new TogglAPIClient(action.payload);
   }
