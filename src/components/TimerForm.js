@@ -20,7 +20,9 @@ const {
 export default class TimerForm extends React.Component {
 
   static propTypes = {
-    dispatch: React.PropTypes.func.isRequired
+    dispatch: React.PropTypes.func.isRequired,
+    onPressStartButton: React.PropTypes.func.isRequired,
+    timer: React.PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -98,6 +100,12 @@ export default class TimerForm extends React.Component {
     this.setState({keyboardType: ref});
   }
 
+  onPressStartButton = () => {
+    this.props.onPressStartButton({
+      description: 'hoge'
+    });
+  }
+
   /**
    * フォーム内がタッチされた場合、フォームを閉じない
    *
@@ -154,7 +162,7 @@ export default class TimerForm extends React.Component {
           <View style={styles.formWrapper}>
             <TextInput {...this.getFormProps()} />
             <TouchableHighlight
-              onPress={this.onPressLogin}
+              onPress={this.onPressStartButton}
               style={styles.startButton}
               underlayColor={zn.color.blue600}
             >

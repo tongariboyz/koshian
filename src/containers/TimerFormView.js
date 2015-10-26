@@ -1,5 +1,6 @@
 import React from 'react-native';
 import {connect} from 'react-redux/native';
+import {start} from '../actions/timer';
 import TimerForm from '../components/TimerForm';
 
 
@@ -7,7 +8,11 @@ class TimerFormView extends React.Component {
 
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
-    period: React.PropTypes.object.isRequired
+    timer: React.PropTypes.object.isRequired
+  }
+
+  onPressStart = timeEntry => {
+    this.props.dispatch(start(timeEntry));
   }
 
   /**
@@ -16,7 +21,13 @@ class TimerFormView extends React.Component {
    * @return {ReactElement}
    */
   render() {
-    return <TimerForm dispatch={this.props.dispatch} />;
+    return (
+      <TimerForm
+        dispatch={this.props.dispatch}
+        onPressStartButton={this.onPressStart}
+        timer={this.props.timer}
+      />
+    );
   }
 }
 
@@ -27,7 +38,7 @@ class TimerFormView extends React.Component {
  * @return {Object}
  */
 function mapStateToProps(state) {
-  return {period: state.period};
+  return {timer: state.timer};
 }
 
 export default connect(mapStateToProps)(TimerFormView);
