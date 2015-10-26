@@ -2,3 +2,5 @@ extends: kanmu/react
 parser: babel-eslint
 globals:
   __DEV__: true
+rules:
+  camelcase: 0
