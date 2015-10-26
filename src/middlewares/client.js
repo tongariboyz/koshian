@@ -2,6 +2,7 @@
 /**
  * API クライアント実行ミドルウェア
  *
+ * @param {function} dispatch dispatch
  * @param {function} getState getState
  * @return {function}
  */
