@@ -3,7 +3,9 @@ import {
   EDIT_START_FORM,
   EDIT_END_FORM,
   REQUEST_START,
-  RECEIVE_START
+  REQUEST_STOP,
+  RECEIVE_START,
+  RECEIVE_STOP
 } from '../constants/timer';
 
 /**
@@ -28,6 +30,7 @@ export function timer(state = {
   isEditing: false,
   isRunning: false,
   isTryingStart: false,
+  isTryingStop: false,
   timeEntry: {}
 }, action) {
   switch (action.type) {
@@ -58,6 +61,12 @@ export function timer(state = {
       state,
       {isTryingStart: true}
     );
+  case REQUEST_STOP:
+    return Object.assign(
+      {},
+      state,
+      {isTryingStop: true}
+    );
   case RECEIVE_START:
     return Object.assign(
       {},
@@ -66,6 +75,17 @@ export function timer(state = {
         isRunning: true,
         isTryingStart: false,
         timeEntry: action.payload.body.data
+      }
+    );
+  case RECEIVE_STOP:
+    return Object.assign(
+      {},
+      state,
+      {
+        isEditing: false,
+        isRunning: false,
+        isTryingStop: false,
+        timeEntry: {}
       }
     );
   default:
