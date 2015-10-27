@@ -3,7 +3,9 @@ import {
   EDIT_START_FORM,
   EDIT_END_FORM,
   REQUEST_START,
-  RECEIVE_START
+  REQUEST_STOP,
+  RECEIVE_START,
+  RECEIVE_STOP
 } from '../constants/timer';
 
 
@@ -25,6 +27,24 @@ export function start(rawTimeEntry) {
       client: {
         type: RECEIVE_START,
         next: client => client.startTimeEntry({time_entry})
+      }
+    }
+  };
+}
+
+/**
+ * 計測を終了
+ *
+ * @param {string} timeEntryId timeEntryId
+ * @return {Object} action
+ */
+export function stop(timeEntryId) {
+  return {
+    type: REQUEST_STOP,
+    meta: {
+      client: {
+        type: RECEIVE_STOP,
+        next: client => client.stopTimeEntry(timeEntryId)
       }
     }
   };
