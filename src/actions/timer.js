@@ -1,13 +1,22 @@
-import {
-  CHANGE_KEYBOARD,
-  EDIT_START_FORM,
-  EDIT_END_FORM,
-  REQUEST_START,
-  REQUEST_STOP,
-  RECEIVE_START,
-  RECEIVE_STOP
-} from '../constants/timer';
+/* @flow */
+import types from '../constants/timer';
 
+type Action = {
+  type: string,
+  payload: any
+};
+type ClientAction = {
+  type: string,
+  meta: {
+    client: {
+      type: string,
+      next: Function
+    }
+  }
+};
+type TimeEntry = {
+  desctiption: string
+};
 
 /**
  * 計測を開始
@@ -15,17 +24,17 @@ import {
  * @param {Object} rawTimeEntry rawtimeentry
  * @return {Object} action
  */
-export function start(rawTimeEntry) {
+export function start(rawTimeEntry: TimeEntry): ClientAction {
   const time_entry = Object.assign(
     {},
     rawTimeEntry,
     {created_with: 'こしあん'}
   );
   return {
-    type: REQUEST_START,
+    type: types.REQUEST_START,
     meta: {
       client: {
-        type: RECEIVE_START,
+        type: types.RECEIVE_START,
         next: client => client.startTimeEntry({time_entry})
       }
     }
@@ -38,12 +47,12 @@ export function start(rawTimeEntry) {
  * @param {string} timeEntryId timeEntryId
  * @return {Object} action
  */
-export function stop(timeEntryId) {
+export function stop(timeEntryId: string): ClientAction {
   return {
-    type: REQUEST_STOP,
+    type: types.REQUEST_STOP,
     meta: {
       client: {
-        type: RECEIVE_STOP,
+        type: types.RECEIVE_STOP,
         next: client => client.stopTimeEntry(timeEntryId)
       }
     }
@@ -56,8 +65,8 @@ export function stop(timeEntryId) {
  * @param {string} keyboardType keyboardType
  * @return {Object} action
  */
-export function changeKeyboard(keyboardType) {
-  return {type: CHANGE_KEYBOARD, payload: {keyboardType}};
+export function changeKeyboard(keyboardType: string): Action {
+  return {type: types.CHANGE_KEYBOARD, payload: {keyboardType}};
 }
 
 /**
@@ -65,8 +74,8 @@ export function changeKeyboard(keyboardType) {
  *
  * @return {Object} action
  */
-export function editStartForm() {
-  return {type: EDIT_START_FORM};
+export function editStartForm(): {type: string} {
+  return {type: types.EDIT_START_FORM};
 }
 
 /**
@@ -74,6 +83,6 @@ export function editStartForm() {
  *
  * @return {Object} action
  */
-export function editEndForm() {
-  return {type: EDIT_END_FORM};
+export function editEndForm(): {type: string} {
+  return {type: types.EDIT_END_FORM};
 }

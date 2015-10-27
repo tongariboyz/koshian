@@ -1,12 +1,18 @@
-import {
-  CHANGE_KEYBOARD,
-  EDIT_START_FORM,
-  EDIT_END_FORM,
-  REQUEST_START,
-  REQUEST_STOP,
-  RECEIVE_START,
-  RECEIVE_STOP
-} from '../constants/timer';
+/* @flow */
+import types from '../constants/timer';
+
+type Action = {
+  type: string,
+  payload: Object
+};
+type State = {
+  keyboardType: string,
+  isEditing: boolean,
+  isRunning: boolean,
+  isTryingStart: boolean,
+  isTryingStop: boolean,
+  timeEntry: Object
+};
 
 /**
  * @typedef {Object} TimerState
@@ -26,22 +32,22 @@ import {
  * @param {Object} action action
  * @return {Object} state
  */
-export function timer(state = {
+export function timer(state: State = {
   keyboardType: 'label',
   isEditing: false,
   isRunning: false,
   isTryingStart: false,
   isTryingStop: false,
   timeEntry: {}
-}, action) {
+}, action: Action): State {
   switch (action.type) {
-  case CHANGE_KEYBOARD:
+  case types.CHANGE_KEYBOARD:
     return Object.assign(
       {},
       state,
       {keyboardType: action.payload.keyboardType}
     );
-  case EDIT_START_FORM:
+  case types.EDIT_START_FORM:
     return Object.assign(
       {},
       state,
@@ -50,25 +56,25 @@ export function timer(state = {
         isEditing: true
       }
     );
-  case EDIT_END_FORM:
+  case types.EDIT_END_FORM:
     return Object.assign(
       {},
       state,
       {isEditing: false}
     );
-  case REQUEST_START:
+  case types.REQUEST_START:
     return Object.assign(
       {},
       state,
       {isTryingStart: true}
     );
-  case REQUEST_STOP:
+  case types.REQUEST_STOP:
     return Object.assign(
       {},
       state,
       {isTryingStop: true}
     );
-  case RECEIVE_START:
+  case types.RECEIVE_START:
     return Object.assign(
       {},
       state,
@@ -78,7 +84,7 @@ export function timer(state = {
         timeEntry: action.payload.body.data
       }
     );
-  case RECEIVE_STOP:
+  case types.RECEIVE_STOP:
     return Object.assign(
       {},
       state,
