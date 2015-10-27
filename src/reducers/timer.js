@@ -14,6 +14,7 @@ import {
  * @property {boolean} state.isEditing フォームの編集状態
  * @property {boolean} state.isRunning 計測中状態
  * @property {boolean} state.isTryingStart 計測開始状態
+ * @property {boolean} state.isTryingStop 計測終了状態
  * @property {Object} state.timeEntry 現在計測中の TimeEntry
  */
 
