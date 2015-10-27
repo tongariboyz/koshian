@@ -15,7 +15,6 @@ export default class PeriodScrollView extends React.Component {
   static propTypes = {
     changePeriodViewIndex: React.PropTypes.func.isRequired,
     changeViewPeriod: React.PropTypes.func.isRequired,
-    dispatch: React.PropTypes.func.isRequired,
     period: React.PropTypes.object.isRequired
   }
 
@@ -28,9 +27,9 @@ export default class PeriodScrollView extends React.Component {
     if (this.state.isMoving) {
       this.setState({isMoving: false});
       if (this.props.period.index < nextProps.period.index) {
-        this.props.dispatch(this.props.changeViewPeriod('next'));
+        this.props.changeViewPeriod('next');
       } else if (this.props.period.index > nextProps.period.index) {
-        this.props.dispatch(this.props.changeViewPeriod('prev'));
+        this.props.changeViewPeriod('prev');
       }
     }
   }
@@ -43,7 +42,7 @@ export default class PeriodScrollView extends React.Component {
   onMomentumScrollEnd = e => {
     if (this.state.isMoving) {
       const x = e.nativeEvent.contentOffset.x;
-      this.props.dispatch(this.props.changePeriodViewIndex(x / width));
+      this.props.changePeriodViewIndex(x / width);
     }
   }
 
@@ -105,10 +104,7 @@ export default class PeriodScrollView extends React.Component {
             <Text style={styles.title}>{s.date.toString()}</Text>
             {timeEntries.map(e => (<Text>{e.description}</Text>))}
           </ScrollView>
-          <RecordsHeader
-            date={s.date}
-            dispatch={this.props.dispatch}
-          />
+          <RecordsHeader date={s.date} />
         </View>
       );
     });

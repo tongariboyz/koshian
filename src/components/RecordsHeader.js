@@ -11,8 +11,7 @@ const {
 export default class RecordsHeader extends React.Component {
 
   static propTypes = {
-    date: React.PropTypes.object.isRequired,
-    dispatch: React.PropTypes.func.isRequired
+    date: React.PropTypes.object.isRequired
   }
 
   /**
