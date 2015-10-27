@@ -2,9 +2,10 @@ import React from 'react-native';
 import Dimensions from 'Dimensions';
 import styles from '../styles/components/periodScrollView';
 import RecordsHeader from '../components/RecordsHeader';
+import TimeEntry from '../components/TimeEntry';
 import {createTimeEntryKey} from '../helpers/dateUtils';
 
-const {ScrollView, Text, View} = React;
+const {ListView, ScrollView, View} = React;
 const {width} = Dimensions.get('window');
 
 const SCROLL_EVENT_THROTTLE = 16;
@@ -95,15 +96,15 @@ export default class PeriodScrollView extends React.Component {
     return this.props.period.stack.map(s => {
       const key = createTimeEntryKey(s.date);
       const timeEntries = this.props.period.timeEntries[key] || [];
+      const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+      const dataSource = ds.cloneWithRows(timeEntries);
       return (
         <View style={styles.view}>
-          <ScrollView
-            style={styles.listScrollView}
-          >
-            <Text style={styles.title}>{s.name}</Text>
-            <Text style={styles.title}>{s.date.toString()}</Text>
-            {timeEntries.map(e => (<Text>{e.description}</Text>))}
-          </ScrollView>
+          <ListView
+            dataSource={dataSource}
+            renderRow={rowData => <TimeEntry timeEntry={rowData} />}
+            style={styles.listView}
+          />
           <RecordsHeader date={s.date} />
         </View>
       );
