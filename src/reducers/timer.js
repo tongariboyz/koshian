@@ -16,12 +16,12 @@ type State = {
 
 /**
  * @typedef {Object} TimerState
- * @property {string} state.keyboardType キーボードタイプ
- * @property {boolean} state.isEditing フォームの編集状態
- * @property {boolean} state.isRunning 計測中状態
- * @property {boolean} state.isTryingStart 計測開始状態
- * @property {boolean} state.isTryingStop 計測終了状態
- * @property {Object} state.timeEntry 現在計測中の TimeEntry
+ * @property {string} keyboardType キーボードタイプ
+ * @property {boolean} isEditing フォームの編集状態
+ * @property {boolean} isRunning 計測中状態
+ * @property {boolean} isTryingStart 計測開始状態
+ * @property {boolean} isTryingStop 計測終了状態
+ * @property {Object} timeEntry 現在計測中の TimeEntry
  */
 
 
