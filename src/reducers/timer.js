@@ -11,7 +11,7 @@ type State = {
   isRunning: boolean,
   isRequestingStart: boolean,
   isRequestingStop: boolean,
-  timeEntry: Object
+  timeEntry: ?Object
 };
 
 /**
@@ -21,7 +21,7 @@ type State = {
  * @property {boolean} isRunning 計測中状態
  * @property {boolean} isRequestingStart 計測開始状態
  * @property {boolean} isRequestingStop 計測終了状態
- * @property {Object} timeEntry 現在計測中の TimeEntry
+ * @property {?Object} timeEntry 現在計測中の TimeEntry
  */
 
 
@@ -38,7 +38,7 @@ export function timer(state: State = {
   isRunning: false,
   isRequestingStart: false,
   isRequestingStop: false,
-  timeEntry: {}
+  timeEntry: null
 }, action: Action): State {
   switch (action.type) {
   case types.CHANGE_KEYBOARD:
@@ -92,7 +92,7 @@ export function timer(state: State = {
         isEditing: false,
         isRunning: false,
         isRequestingStop: false,
-        timeEntry: {}
+        timeEntry: null
       }
     );
   default:
