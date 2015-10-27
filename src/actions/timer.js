@@ -1,5 +1,5 @@
 /* @flow */
-import types from '../constants/timer';
+import types from '../constants/timerActionTypes';
 
 type Action = {
   type: string,

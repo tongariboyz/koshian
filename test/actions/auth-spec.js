@@ -1,12 +1,16 @@
 import assert from 'power-assert';
 import proxyquire from 'proxyquire';
-
-import * as types from '../../src/constants/authActionTypes';
+import clearRequire from 'clear-require';
 
 
 describe('actions/auth', () => {
   let actions = null;
+  let types = null;
 
+  before(() => {
+    clearRequire('dacho');
+    types = require('../../src/constants/authActionTypes');
+  });
   beforeEach(() => {
     actions = proxyquire('../../src/actions/auth', {
       '../helpers/storageUtils': {

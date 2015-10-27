@@ -1,5 +1,5 @@
 /* @flow */
-import types from '../constants/period';
+import types from '../constants/periodActionTypes';
 import {getPeriodDates} from '../helpers/dateUtils';
 
 type Action = {

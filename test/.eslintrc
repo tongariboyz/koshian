@@ -3,3 +3,4 @@ env:
 rules:
   max-nested-callbacks: [1, 12]
   no-magic-numbers: 0
+  global-require: 0
