@@ -71,7 +71,7 @@ export function period(state : State = {
     const key = createTimeEntryKey(query.start_date);
     const timeEntries = Object.assign({}, state.timeEntries);
     // XXX: Flow v0.17 時点では computed property の assign は未サポート
-    timeEntries[key] = action.payload.body;
+    timeEntries[key] = action.payload.body.slice().reverse();
     return Object.assign(
       {},
       state,
