@@ -9,8 +9,8 @@ type State = {
   keyboardType: string,
   isEditing: boolean,
   isRunning: boolean,
-  isTryingStart: boolean,
-  isTryingStop: boolean,
+  isRequestingStart: boolean,
+  isRequestingStop: boolean,
   timeEntry: Object
 };
 
@@ -19,8 +19,8 @@ type State = {
  * @property {string} keyboardType キーボードタイプ
  * @property {boolean} isEditing フォームの編集状態
  * @property {boolean} isRunning 計測中状態
- * @property {boolean} isTryingStart 計測開始状態
- * @property {boolean} isTryingStop 計測終了状態
+ * @property {boolean} isRequestingStart 計測開始状態
+ * @property {boolean} isRequestingStop 計測終了状態
  * @property {Object} timeEntry 現在計測中の TimeEntry
  */
 
@@ -36,8 +36,8 @@ export function timer(state: State = {
   keyboardType: 'label',
   isEditing: false,
   isRunning: false,
-  isTryingStart: false,
-  isTryingStop: false,
+  isRequestingStart: false,
+  isRequestingStop: false,
   timeEntry: {}
 }, action: Action): State {
   switch (action.type) {
@@ -66,13 +66,13 @@ export function timer(state: State = {
     return Object.assign(
       {},
       state,
-      {isTryingStart: true}
+      {isRequestingStart: true}
     );
   case types.REQUEST_STOP:
     return Object.assign(
       {},
       state,
-      {isTryingStop: true}
+      {isRequestingStop: true}
     );
   case types.RECEIVE_START:
     return Object.assign(
@@ -80,7 +80,7 @@ export function timer(state: State = {
       state,
       {
         isRunning: true,
-        isTryingStart: false,
+        isRequestingStart: false,
         timeEntry: action.payload.body.data
       }
     );
@@ -91,7 +91,7 @@ export function timer(state: State = {
       {
         isEditing: false,
         isRunning: false,
-        isTryingStop: false,
+        isRequestingStop: false,
         timeEntry: {}
       }
     );
