@@ -1,6 +1,7 @@
 import React from 'react-native';
 import yugo from 'yugo';
 import {EASE_KEY_OPEN, EASE_OUT_EXPO} from '../constants/easing';
+import RunningView from './RunningView';
 import TimerForm from './TimerForm';
 import styles from '../styles/components/timerForm';
 
@@ -12,6 +13,7 @@ const {
 } = React;
 const ANIMATED_PAN = new Animated.ValueXY();
 const KEYBOARD_CHANGE_BUTTONS_HEIGHT = 32;
+const RUNNING_VIEW_POS_Y = 94;
 
 
 export default class TimerView extends React.Component {
@@ -34,6 +36,13 @@ export default class TimerView extends React.Component {
   componentDidUpdate() {
     if (!this.props.timer.isEditing) {
       this.closeForm();
+    }
+    if (this.props.timer.isRunning) {
+      Animated.timing(ANIMATED_PAN, {
+        easing: Easing.bezier(...EASE_KEY_OPEN),
+        duration: 300,
+        toValue: {x: 0, y: -RUNNING_VIEW_POS_Y}
+      }).start();
     }
   }
 
@@ -96,6 +105,28 @@ export default class TimerView extends React.Component {
   }
 
   /**
+   * TimerForm または RunningView をレンダリング
+   *
+   * @return {ReactElement}
+   */
+  renderFormOrView() {
+    if (this.props.timer.isRunning) {
+      return (
+        <RunningView
+          stop={this.props.actions.stop}
+          timeEntry={this.props.timer.timeEntry}
+        />
+      );
+    }
+    return (
+      <TimerForm
+        actions={this.props.actions}
+        timer={this.props.timer}
+      />
+    );
+  }
+
+  /**
    * レンダリング
    *
    * @return {ReactElement}
@@ -110,10 +141,7 @@ export default class TimerView extends React.Component {
           onTouchStart={this.onTouchStartForm}
           style={yugo(styles.animatedView, {transform: ANIMATED_PAN.getTranslateTransform()})}
         >
-          <TimerForm
-            actions={this.props.actions}
-            timer={this.props.timer}
-          />
+          {this.renderFormOrView()}
         </Animated.View>
       </View>
     );
