@@ -3,7 +3,7 @@ import yugo from 'yugo';
 import zn from '../zn';
 
 const {height, width} = Dimensions.get('window');
-export const FORM_HEIGHT = 50;
+const FORM_HEIGHT = 50;
 
 const styles = {
   view: {
@@ -29,7 +29,27 @@ const styles = {
     shadowOpacity: 0.8,
     shadowOffset: {height: 0, width: 0}
   },
-  textInput: yugo(zn.form.line, {fontSize: 14, borderWidth: 0})
+  formWrapper: {
+    flexDirection: 'row',
+    height: 50,
+    width
+  },
+  startButton: yugo(zn.button, {
+    flex: 0.3,
+    paddingVertical: 8,
+    marginHorizontal: 8
+  }),
+  startButtonLabel: {
+    color: '#fff',
+    fontWeight: '700'
+  },
+  textInput: yugo(zn.form.line, {
+    fontSize: 14,
+    borderWidth: 0,
+    flex: 1,
+    marginVertical: 6,
+    marginHorizontal: 4
+  })
 };
 
 export default styles;
