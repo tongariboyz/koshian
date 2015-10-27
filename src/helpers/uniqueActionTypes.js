@@ -1,3 +1,4 @@
+/* @flow */
 const registeredKeys = [];
 
 /**
@@ -7,7 +8,9 @@ const registeredKeys = [];
  * @param {string[]} actionTypes action type 名リスト
  * @return {Object}
  */
-export default function uniqueActionTypes(prefix, actionTypes) {
+export default function uniqueActionTypes(prefix: string, actionTypes: Array<string>): {
+  [key: string]: string
+} {
   const ret = {};
   actionTypes.forEach(type => {
     const key = `${prefix}${type}`;

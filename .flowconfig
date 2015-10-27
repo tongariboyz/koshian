@@ -26,7 +26,33 @@
 # Ignore Website
 .*/website/.*
 
+.*/node_modules/react/.*
+.*/node_modules/react-redux/node_modules/invariant/.*
+.*/node_modules/babel/.*
+.*/node_modules/babel-eslint/.*
+.*/node_modules/babel-plugin-espower/.*
+.*/node_modules/babel-runtime/.*
+.*/node_modules/base64util/.*
+.*/node_modules/codecov.io/.*
+.*/node_modules/esdoc/.*
+.*/node_modules/esdoc-es7-plugin/.*
+.*/node_modules/eslint/.*
+.*/node_modules/eslint-config-kanmu/.*
+.*/node_modules/eslint-plugin-react/.*
+.*/node_modules/isparta/.*
+.*/node_modules/mocha/.*
+.*/node_modules/npm-run-all/.*
+.*/node_modules/power-assert/.*
+.*/node_modules/proxyquire/.*
+.*/node_modules/react-addons-test-utils/.*
+.*/node_modules/react-shallow-testutils/.*
+.*/node_modules/sinon/.*
+.*/node_modules/superagent/.*
+.*/node_modules/watch/.*
+
 [include]
+.*/node_modules/react/.*
+.*/src/.*
 
 [libs]
 node_modules/react-native/Libraries/react-native/react-native-interface.js
@@ -43,9 +69,9 @@ suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
 suppress_type=$FixMe
 
-suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(>=0\\.\\(1[0-6]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)
-suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(>=0\\.\\(1[0-6]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)? #[0-9]+
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(>=0\\.\\(1[0-7]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)
+suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(>=0\\.\\(1[0-7]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)? #[0-9]+
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 
 [version]
-0.16.0
+0.17.0

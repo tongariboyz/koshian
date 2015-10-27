@@ -14,6 +14,7 @@
     "eslint": "^1.7.1",
     "eslint-config-kanmu": "^7.0.0",
     "eslint-plugin-react": "^3.6.2",
+    "flow-bin": "^0.17.0",
     "isparta": "^3.1.0",
     "mocha": "^2.3.3",
     "nock": "^2.15.0",
@@ -23,12 +24,13 @@
     "react": "^0.14.0",
     "react-addons-test-utils": "^0.14.0",
     "react-shallow-testutils": "^0.6.0",
-    "sinon": "^1.17.1"
+    "sinon": "^1.17.1",
+    "watch": "^0.16.0"
   },
   "dependencies": {
     "base64util": "^1.0.0",
     "moment": "^2.10.6",
-    "react-native": "^0.11.4",
+    "react-native": "^0.13.1",
     "react-redux": "^3.1.0",
     "redux": "^3.0.2",
     "redux-logger": "^2.0.4",
@@ -47,6 +49,7 @@
     "clean": "rm -rf {dist,coverage}",
     "codecov": "cat coverage/lcov.info | codecov",
     "doc": "esdoc -c esdoc.json",
+    "stop-flow": "flow stop",
     "lint": "eslint {src,test}",
     "packager": "node_modules/react-native/packager/packager.sh",
     "prepackager": "npm run build",
@@ -57,6 +60,7 @@
     "test": "npm-run-all lint test:*",
     "test:coverage": "babel-node $(npm bin)/isparta cover --report text --report html --report lcovonly _mocha -- test/**/*spec.js",
     "watch": "npm-run-all --parallel watch:*",
+    "watch:flow": "watch flow src/",
     "watch:src": "babel --out-dir dist --watch src",
     "watch:test": "mocha --watch test/**/*spec.js"
   }

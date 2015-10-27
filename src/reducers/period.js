@@ -1,13 +1,22 @@
+/* @flow */
 import moment from 'moment';
-import {
-  CHANGE_PERIOD_VIEW_INDEX,
-  CHANGE_VIEW_PERIOD,
-  RESPONSE_PERIOD_TIME_ENTRIES
-} from '../constants/period';
+import types from '../constants/period';
 import {createTimeEntryKey} from '../helpers/dateUtils';
 
 const INITIAL_CURRENT_DATE = moment().startOf('day').toDate();
 const PERIOD_VIEW_LENGTH = 8;
+
+type Action = {
+  type: string,
+  payload: Object
+};
+type State = {
+  currentDate: Date,
+  distance: number,
+  index: number,
+  stack: any[],
+  timeEntries: {[key: string]: Object[]}
+};
 
 /**
  * @typedef {Object} PeriodState
@@ -25,15 +34,15 @@ const PERIOD_VIEW_LENGTH = 8;
  * @param {Object} action action
  * @return {PeriodState} state
  */
-export function period(state = {
+export function period(state : State = {
   currentDate: INITIAL_CURRENT_DATE,
   distance: 0,
   timeEntries: {},
   index: PERIOD_VIEW_LENGTH,
   stack: getViewPeriods(INITIAL_CURRENT_DATE)
-}, action) {
+}, action: Action): State {
   switch (action.type) {
-  case CHANGE_PERIOD_VIEW_INDEX:
+  case types.CHANGE_PERIOD_VIEW_INDEX:
     return Object.assign(
       {},
       state,
@@ -41,7 +50,7 @@ export function period(state = {
         distance: Math.abs(state.index - action.payload.index),
         index: action.payload.index}
     );
-  case CHANGE_VIEW_PERIOD:
+  case types.CHANGE_VIEW_PERIOD:
     const currentDate = getNextCurrentDate(
       state.currentDate,
       state.distance,
@@ -56,15 +65,13 @@ export function period(state = {
         stack: getViewPeriods(currentDate)
       }
     );
-  case RESPONSE_PERIOD_TIME_ENTRIES:
+  case types.RESPONSE_PERIOD_TIME_ENTRIES:
     // FIXME: 一旦格納方法は適当
     const query = action.payload.request.query;
     const key = createTimeEntryKey(query.start_date);
-    const timeEntries = Object.assign(
-      {},
-      state.timeEntries,
-      {[key]: action.payload.body}
-    );
+    const timeEntries = Object.assign({}, state.timeEntries);
+    // XXX: Flow v0.17 時点では computed property の assign は未サポート
+    timeEntries[key] = action.payload.body;
     return Object.assign(
       {},
       state,
@@ -84,7 +91,7 @@ export function period(state = {
  * @param {string} [opts.direction] direction
  * @return {Date} currentDate
  */
-function getNextCurrentDate(beforeCurrentDate, distance, opts = {}) {
+function getNextCurrentDate(beforeCurrentDate: Date, distance: number, opts = {}): Date {
   const currentDate = moment(beforeCurrentDate);
   if (opts.direction === 'prev') {
     currentDate.subtract(distance, 'd');
@@ -100,7 +107,7 @@ function getNextCurrentDate(beforeCurrentDate, distance, opts = {}) {
  * @param {Date} currentDate currentDate
  * @return {Object[]} viewPeriods
  */
-function getViewPeriods(currentDate) {
+function getViewPeriods(currentDate: Date): Object[] {
   const prevs = [];
   const nexts = [];
   for (let v = PERIOD_VIEW_LENGTH; v >= 1; v--) {

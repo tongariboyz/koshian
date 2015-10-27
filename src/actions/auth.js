@@ -1,7 +1,18 @@
+/* @flow */
 import TogglAPIClient from '../helpers/TogglAPIClient';
 import storageUtils from '../helpers/storageUtils';
-import * as types from '../constants/authActionTypes';
+import types from '../constants/authActionTypes';
 import {AUTH_TOKEN_KEY} from '../constants/storage';
+
+type Action = {
+  type: string,
+  payload: any,
+}
+type UserData = {
+  username: string,
+  password: string
+};
+
 
 /**
  * APIToken リクエストを実行
@@ -11,7 +22,7 @@ import {AUTH_TOKEN_KEY} from '../constants/storage';
  * @param {string} userData.password password
  * @return {function}
  */
-function getToken(userData) {
+function getToken(userData: UserData): Function {
   return dispatch => {
     const promise = TogglAPIClient.login(userData.username, userData.password);
     dispatch(requestToken());
@@ -27,7 +38,7 @@ function getToken(userData) {
  * @param {string} userData.password password
  * @return {function}
  */
-export function login(userData) {
+export function login(userData: UserData): Function {
   return dispatch => {
     return dispatch(getToken(userData));
   };
@@ -39,7 +50,7 @@ export function login(userData) {
  *
  * @return {function}
  */
-export function logout() {
+export function logout(): Function {
   return dispatch => {
     dispatch(removeToken());
     return dispatch({type: types.LOGOUT});
@@ -52,7 +63,7 @@ export function logout() {
  * @param {Promise} client TogglAPIClient.login の戻り値
  * @return {Object} action
  */
-export function receiveToken(client) {
+export function receiveToken(client): Action {
   return {type: types.RECEIVE_TOKEN, payload: client};
 }
 
@@ -61,7 +72,7 @@ export function receiveToken(client) {
  *
  * @return {Object} action
  */
-export function requestToken() {
+export function requestToken(): {type: string} {
   return {type: types.REQUEST_TOKEN};
 }
 
@@ -71,7 +82,7 @@ export function requestToken() {
  *
  * @return {Object}
  */
-export function restoreToken() {
+export function restoreToken(): Action {
   const promise = storageUtils.getItem(AUTH_TOKEN_KEY);
   return {type: types.RESTORE_TOKEN, payload: promise};
 }
@@ -83,7 +94,7 @@ export function restoreToken() {
  * @param {string} token Auth Token
  * @return {Object}
  */
-export function saveToken(token) {
+export function saveToken(token: string): Action {
   const promise = storageUtils.setItem(AUTH_TOKEN_KEY, token);
   return {type: types.SAVE_TOKEN, payload: promise};
 }
@@ -100,7 +111,7 @@ export function saveToken(token) {
  * @param {string} token auth token
  * @return {function}
  */
-export function saveTokenIfNeeded(token) {
+export function saveTokenIfNeeded(token: string): Function {
   return dispatch => {
     storageUtils.getItem(AUTH_TOKEN_KEY)
       .then(oldToken => {
@@ -117,7 +128,7 @@ export function saveTokenIfNeeded(token) {
  *
  * @return {Object}
  */
-export function removeToken() {
+export function removeToken(): Action {
   const promise = storageUtils.removeItem(AUTH_TOKEN_KEY);
   return {type: types.REMOVE_TOKEN, payload: promise};
 }
