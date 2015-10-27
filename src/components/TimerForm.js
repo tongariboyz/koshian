@@ -18,6 +18,11 @@ export default class TimerForm extends React.Component {
     timer: React.PropTypes.object.isRequired
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {description: ''};
+  }
+
   /**
    * 編集中でない場合、フォームのフォーカスを解除
    */
@@ -25,6 +30,15 @@ export default class TimerForm extends React.Component {
     if (!this.props.timer.isEditing) {
       this.refs.timer.blur();
     }
+  }
+
+  /**
+   * 入力されたテキストを保存
+   *
+   * @param {string} description description text
+   */
+  onChangeText = description => {
+    this.setState({description});
   }
 
   /**
@@ -62,7 +76,7 @@ export default class TimerForm extends React.Component {
    */
   onPressStartButton = () => {
     this.props.actions.start({
-      description: 'hoge'
+      description: this.state.description
     });
   }
 
@@ -75,11 +89,13 @@ export default class TimerForm extends React.Component {
     return {
       controlled: true,
       keyboardType: 'default',
+      onChangeText: this.onChangeText,
       onFocus: this.onFocus,
       onSubmitEditing: this.onSubmitEditing,
       placeholder: 'タイマーを追加',
       ref: 'timer',
-      style: styles.textInput
+      style: styles.textInput,
+      valur: this.state.description
     };
   }
 
