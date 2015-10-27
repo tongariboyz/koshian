@@ -2,7 +2,7 @@ import React from 'react-native';
 import moment from 'moment';
 import 'moment-duration-format';
 import yugo from 'yugo';
-import styles from '../styles/components/timerEntry';
+import styles from '../styles/components/timeEntry';
 
 const {Text, View} = React;
 
