@@ -1,6 +1,6 @@
 /* @flow */
 import moment from 'moment';
-import types from '../constants/period';
+import types from '../constants/periodActionTypes';
 import {createTimeEntryKey} from '../helpers/dateUtils';
 
 const INITIAL_CURRENT_DATE = moment().startOf('day').toDate();
