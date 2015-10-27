@@ -78,6 +78,16 @@ export default class TogglAPIClient {
   }
 
   /**
+   * TimeEntry 終了リクエストを送信する
+   *
+   * @param {string} timeEntryId timeentryId
+   * @return {Promise}
+   */
+  stopTimeEntry(timeEntryId) {
+    return this.put(`/time_entries/${timeEntryId}/stop`);
+  }
+
+  /**
    * ログインリクエストを送信する
    *
    * @param {string} username username
