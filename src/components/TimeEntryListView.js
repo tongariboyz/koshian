@@ -1,19 +1,29 @@
+/* @flow */
 import React from 'react-native';
 import styles from '../styles/components/periodScrollView';
 import RecordsHeader from '../components/RecordsHeader';
 import TimeEntry from '../components/TimeEntry';
 
 const {ListView, View} = React;
+const propTypes = {
+  stack: React.PropTypes.object.isRequired,
+  timeEntries: React.PropTypes.array.isRequired
+};
+
+type Props = {
+  stack: Object;
+  timeEntries: number;
+};
+type State = {
+  ds: Object;
+};
 
 
 export default class TimeEntryListView extends React.Component {
 
-  static propTypes = {
-    stack: React.PropTypes.object.isRequired,
-    timeEntries: React.PropTypes.array.isRequired
-  }
+  state: State;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       ds: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
@@ -38,3 +48,5 @@ export default class TimeEntryListView extends React.Component {
     );
   }
 }
+
+TimeEntryListView.propTypes = propTypes;

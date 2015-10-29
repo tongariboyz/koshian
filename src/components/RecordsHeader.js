@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react-native';
 import moment from 'moment';
 import styles from '../styles/components/recordsHeader';
@@ -6,13 +7,12 @@ const {
   Text,
   View
 } = React;
+const propTypes = {
+  date: React.PropTypes.object.isRequired
+};
 
 
 export default class RecordsHeader extends React.Component {
-
-  static propTypes = {
-    date: React.PropTypes.object.isRequired
-  }
 
   /**
    * レンダリング
@@ -31,3 +31,5 @@ export default class RecordsHeader extends React.Component {
     );
   }
 }
+
+RecordsHeader.propTypes = propTypes;

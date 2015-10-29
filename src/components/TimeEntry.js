@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react-native';
 import moment from 'moment';
 import 'moment-duration-format';
@@ -5,20 +6,19 @@ import yugo from 'yugo';
 import styles from '../styles/components/timeEntry';
 
 const {Text, View} = React;
+const propTypes = {
+  timeEntry: React.PropTypes.object.isRequired
+};
 
 
 export default class TimeEntry extends React.Component {
-
-  static propTypes = {
-    timeEntry: React.PropTypes.object.isRequired
-  }
 
   /**
    * 説明スタイルを返す
    *
    * @return {Object} style
    */
-  getDescriptionStyle() {
+  getDescriptionStyle(): Object {
     return yugo(
       styles.description,
       [styles.noDescription, !this.props.timeEntry.description]
@@ -30,7 +30,7 @@ export default class TimeEntry extends React.Component {
    *
    * @return {string} description
    */
-  renderDescription() {
+  renderDescription(): string {
     if (this.props.timeEntry.description) {
       return this.props.timeEntry.description;
     }
@@ -82,3 +82,5 @@ export default class TimeEntry extends React.Component {
     );
   }
 }
+
+TimeEntry.propTypes = propTypes;
