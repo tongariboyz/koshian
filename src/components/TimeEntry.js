@@ -40,7 +40,7 @@ export default class TimeEntry extends React.Component {
   /**
    * 経過時間をレンダリング
    *
-   * @return {string} time
+   * @return {ReactElement} time
    */
   renderTime() {
     const minute = 60;
