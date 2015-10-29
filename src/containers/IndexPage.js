@@ -1,11 +1,8 @@
 import React from 'react-native';
 import {connect} from 'react-redux/native';
+import {bindActionCreators} from 'redux';
 import {logout} from '../actions/auth';
-import {
-  changePeriodViewIndex,
-  changeViewPeriod,
-  initializePeriodViewIndex
-} from '../actions/period';
+import * as PeriodActions from '../actions/period';
 import TimerFormView from './TimerFormView';
 import PeriodScrollView from '../components/PeriodScrollView';
 
@@ -19,8 +16,13 @@ class IndexPage extends React.Component {
     period: React.PropTypes.object.isRequired
   }
 
+  constructor(props) {
+    super(props);
+    this.actions = bindActionCreators(PeriodActions, this.props.dispatch);
+  }
+
   componentWillMount() {
-    this.props.dispatch(initializePeriodViewIndex(this.props.period.currentDate));
+    this.actions.initializePeriodViewIndex(this.props.period.currentDate);
   }
 
   onPressLogoutBtn = () => {
@@ -48,9 +50,8 @@ class IndexPage extends React.Component {
       <View>
         {this.renderLogoutBtn()}
         <PeriodScrollView
-          changePeriodViewIndex={changePeriodViewIndex}
-          changeViewPeriod={changeViewPeriod}
-          dispatch={this.props.dispatch}
+          changePeriodViewIndex={this.actions.changePeriodViewIndex}
+          fetchTimeEntries={this.actions.fetchTimeEntries}
           period={this.props.period}
         />
         <TimerFormView />

@@ -15,14 +15,10 @@ const styles = {
     width,
     overflow: 'hidden'
   },
-  listScrollView: {
+  listView: {
     top: 80,
+    paddingVertical: 16,
     width
-  },
-  title: {
-    fontSize: 20,
-    paddingTop: 20,
-    paddingBottom: 20
   }
 };
 
