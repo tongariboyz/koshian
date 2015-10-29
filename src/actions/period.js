@@ -22,15 +22,29 @@ export function changePeriodViewIndex(index: number): Action {
 }
 
 /**
- * 表示する期間を変更
+ * 表示する TimeEntries を取得
  *
- * @param {string} direction direction
+ * @param {Date} currentDate 現在表示対象の日時
  * @return {Object}
  */
-export function changeViewPeriod(direction: string): Action {
+export function fetchTimeEntries(currentDate: Date): {
+  type: string,
+  meta: {
+    client: {
+      type: string,
+      next: Function
+    }
+  }
+} {
+  const [start, end] = getPeriodDates(currentDate, 1);
   return {
-    type: types.CHANGE_VIEW_PERIOD,
-    payload: {direction}
+    type: types.FETCH_TIME_ENTRIES,
+    meta: {
+      client: {
+        type: types.RESPONSE_PERIOD_TIME_ENTRIES,
+        next: client => client.getTimeEntries(start, end)
+      }
+    }
   };
 }
 

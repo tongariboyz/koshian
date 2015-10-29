@@ -14,22 +14,26 @@ export default class PeriodScrollView extends React.Component {
 
   static propTypes = {
     changePeriodViewIndex: React.PropTypes.func.isRequired,
-    changeViewPeriod: React.PropTypes.func.isRequired,
+    fetchTimeEntries: React.PropTypes.func.isRequired,
     period: React.PropTypes.object.isRequired
   }
 
   constructor(props) {
     super(props);
-    this.state = {isMoving: false};
+    this.state = {
+      initialIndex: props.period.index,
+      isMoving: false
+    };
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.state.isMoving) {
       this.setState({isMoving: false});
-      if (this.props.period.index < nextProps.period.index) {
-        this.props.changeViewPeriod('next');
-      } else if (this.props.period.index > nextProps.period.index) {
-        this.props.changeViewPeriod('prev');
+      if (this.props.period.index !== nextProps.period.index) {
+        const key = createTimeEntryKey(nextProps.period.currentDate);
+        if (!nextProps.period.timeEntries[key]) {
+          this.props.fetchTimeEntries(nextProps.period.currentDate);
+        }
       }
     }
   }
@@ -40,10 +44,8 @@ export default class PeriodScrollView extends React.Component {
    * @param {Event} e event
    */
   onMomentumScrollEnd = e => {
-    if (this.state.isMoving) {
-      const x = e.nativeEvent.contentOffset.x;
-      this.props.changePeriodViewIndex(x / width);
-    }
+    const index = e.nativeEvent.contentOffset.x / width;
+    this.props.changePeriodViewIndex(index);
   }
 
   /**
@@ -60,7 +62,7 @@ export default class PeriodScrollView extends React.Component {
    */
   getOffset() {
     return {
-      x: width * this.props.period.index,
+      x: width * this.state.initialIndex,
       y: 0
     };
   }
@@ -79,6 +81,7 @@ export default class PeriodScrollView extends React.Component {
       onTouchStart: this.onTouchStart,
       pagingEnabled: true,
       ref: 'scrollView',
+      removeClippedSubviews: true,
       scrollEventThrottle: SCROLL_EVENT_THROTTLE,
       showsHorizontalScrollIndicator: false,
       showsVerticalScrollIndicator: false,

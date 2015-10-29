@@ -4,7 +4,7 @@ import types from '../constants/periodActionTypes';
 import {createTimeEntryKey} from '../helpers/dateUtils';
 
 const INITIAL_CURRENT_DATE = moment().startOf('day').toDate();
-const PERIOD_VIEW_LENGTH = 8;
+const PERIOD_VIEW_LENGTH = 52;
 
 type Action = {
   type: string,
@@ -12,7 +12,6 @@ type Action = {
 };
 type State = {
   currentDate: Date,
-  distance: number,
   index: number,
   stack: any[],
   timeEntries: {[key: string]: Object[]}
@@ -21,7 +20,6 @@ type State = {
 /**
  * @typedef {Object} PeriodState
  * @property {Date} state.currentDate 現在表示している期間の日付
- * @property {number} state.distance 表示期間を変更する間隔
  * @property {number} state.index 現在表示しているビュー番号
  * @property {Object[]} state.stack 表示する期間のデータセット
  * @property {Object} state.timeEntries 日付文字列をキーにしたTimeEntryの配列
@@ -36,33 +34,23 @@ type State = {
  */
 export function period(state : State = {
   currentDate: INITIAL_CURRENT_DATE,
-  distance: 0,
   timeEntries: {},
   index: PERIOD_VIEW_LENGTH,
   stack: getViewPeriods(INITIAL_CURRENT_DATE)
 }, action: Action): State {
   switch (action.type) {
   case types.CHANGE_PERIOD_VIEW_INDEX:
-    return Object.assign(
-      {},
-      state,
-      {
-        distance: Math.abs(state.index - action.payload.index),
-        index: action.payload.index}
-    );
-  case types.CHANGE_VIEW_PERIOD:
     const currentDate = getNextCurrentDate(
       state.currentDate,
-      state.distance,
-      {direction: action.payload.direction}
+      state.index,
+      action.payload.index
     );
     return Object.assign(
       {},
       state,
       {
         currentDate,
-        index: PERIOD_VIEW_LENGTH,
-        stack: getViewPeriods(currentDate)
+        index: action.payload.index
       }
     );
   case types.RESPONSE_PERIOD_TIME_ENTRIES:
@@ -86,16 +74,20 @@ export function period(state : State = {
  * 次に表示する期間を返す
  *
  * @param {Date} beforeCurrentDate beforeCurrentDate
- * @param {number} distance distance
- * @param {Object} [opts] options
- * @param {string} [opts.direction] direction
+ * @param {number} currentIndex currentIndex
+ * @param {number} nextIndex nextIndex
  * @return {Date} currentDate
  */
-function getNextCurrentDate(beforeCurrentDate: Date, distance: number, opts = {}): Date {
+function getNextCurrentDate(
+  beforeCurrentDate: Date,
+  currentIndex: number,
+  nextIndex: number
+): Date {
   const currentDate = moment(beforeCurrentDate);
-  if (opts.direction === 'prev') {
+  const distance = Math.abs(currentIndex - nextIndex);
+  if (currentIndex > nextIndex) {
     currentDate.subtract(distance, 'd');
-  } else if (opts.direction === 'next') {
+  } else {
     currentDate.add(distance, 'd');
   }
   return new Date(currentDate.format());

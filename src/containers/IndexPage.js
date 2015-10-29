@@ -51,7 +51,7 @@ class IndexPage extends React.Component {
         {this.renderLogoutBtn()}
         <PeriodScrollView
           changePeriodViewIndex={this.actions.changePeriodViewIndex}
-          changeViewPeriod={this.actions.changeViewPeriod}
+          fetchTimeEntries={this.actions.fetchTimeEntries}
           period={this.props.period}
         />
         <TimerFormView />
