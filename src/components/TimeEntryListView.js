@@ -15,7 +15,7 @@ type Props = {
   timeEntries: number;
 };
 type State = {
-  ds: Object;
+  ds: ListView.DataSource;
 };
 
 
