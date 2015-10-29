@@ -1,5 +1,7 @@
+/* @flow */
 import React from 'react-native';
 import zn from '../styles/zn';
+import type {NativeScrollEvent} from '../flowtypes';
 
 const {
   ScrollView,
@@ -33,15 +35,28 @@ const styles = StyleSheet.create({
   }
 });
 
+const propTypes = {
+  isConnecting: React.PropTypes.bool.isRequired,
+  onPressLogin: React.PropTypes.func.isRequired
+};
+
+type Props = {
+  isConnecting: bool;
+  onPressLogin: bool;
+};
+type State = {
+  beforeOffsetY: number;
+  isEditing: bool;
+  password: string;
+  username: string;
+};
+
 
 export default class LoginForm extends React.Component {
 
-  static propTypes = {
-    isConnecting: React.PropTypes.bool.isRequired,
-    onPressLogin: React.PropTypes.func.isRequired
-  }
+  state: State;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       beforeOffsetY: 0,
@@ -49,6 +64,14 @@ export default class LoginForm extends React.Component {
       password: '',
       username: ''
     };
+
+    this.onChangeText.bind(this);
+    this.onEndEditing.bind(this);
+    this.onFocus.bind(this);
+    this.onPress.bind(this);
+    this.onPressLogin.bind(this);
+    this.onScroll.bind(this);
+    this.onTouchEnd.bind(this);
   }
 
   /**
@@ -57,7 +80,7 @@ export default class LoginForm extends React.Component {
    * @param {string} ref refName
    * @param {string} text text
    */
-  onChangeText = (ref, text) => {
+  onChangeText(ref: string, text: string) {
     const state = {};
     state[ref] = text;
     this.setState(state);
@@ -66,7 +89,7 @@ export default class LoginForm extends React.Component {
   /**
    * 編集完了時にスクロール位置を戻す
    */
-  onEndEditing = () => {
+  onEndEditing() {
     if (this.state.isEditing) {
       this.setState({isEditing: false});
       const scrollResponder = this.refs.scrollView.getScrollResponder();
@@ -79,7 +102,7 @@ export default class LoginForm extends React.Component {
    *
    * @param {string} refName ref name
    */
-  onFocus(refName) {
+  onFocus(refName: string) {
     this.setState({isEditing: true});
     setTimeout(() => {
       const scrollResponder = this.refs.scrollView.getScrollResponder();
@@ -94,7 +117,7 @@ export default class LoginForm extends React.Component {
   /**
    * onPressLogin に username と password を渡す
    */
-  onPressLogin = () => {
+  onPressLogin() {
     this.props.onPressLogin(this.state.username, this.state.password);
   }
 
@@ -103,7 +126,7 @@ export default class LoginForm extends React.Component {
    *
    * @param {Event} e event
    */
-  onScroll = e => {
+  onScroll(e: NativeScrollEvent) {
     if (!this.state.isEditing) {
       this.setState({beforeOffsetY: e.nativeEvent.contentOffset.y});
     }
@@ -112,7 +135,7 @@ export default class LoginForm extends React.Component {
   /**
    * フォーム外でのタッチ終了時にスクロール位置を戻す
    */
-  onTouchEnd = () => {
+  onTouchEnd() {
     if (this.state.isEditing) {
       this.setState({isEditing: false});
       const scrollResponder = this.refs.scrollView.getScrollResponder();
@@ -129,8 +152,11 @@ export default class LoginForm extends React.Component {
    * @param {string} [props.placeholder] placeholder
    * @param {boolean} [props.secureTextEntry] secureTextEntry
    * @return {Object} props
+   *
+   * @todo TextInput.propTypes をどうにか流用して import したい
+   * @todo Optional な Object property を Flow で表現したい
    */
-  getFormProps(props) {
+  getFormProps(props: Object): Object {
     return {
       keyboardType: 'default',
       onChangeText: t => this.onChangeText(props.ref, t),
@@ -146,8 +172,9 @@ export default class LoginForm extends React.Component {
    * ScrollView の props を返す
    *
    * @return {Object} props
+   * @todo ScrollView.propTypes をどうにか流用して import したい
    */
-  getScrollViewProps() {
+  getScrollViewProps(): Object {
     return {
       keyboardDismissMode: 'on-drag',
       keyboardShouldPersistTaps: false,
@@ -193,3 +220,6 @@ export default class LoginForm extends React.Component {
     );
   }
 }
+
+
+LoginForm.propTypes = propTypes;
