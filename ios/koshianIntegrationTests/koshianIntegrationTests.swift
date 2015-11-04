@@ -6,30 +6,45 @@
 //  Copyright © 2015年 Facebook. All rights reserved.
 //
 
+import UIKit
 import XCTest
 
+let TIMEOUT_SECONDS: Double = 10
+
+
 class koshianIntegrationTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+  
+  var _runner: RCTTestRunner? = nil;
+  
+  override func setUp() {
+    super.setUp()
+    let version: NSOperatingSystemVersion = NSProcessInfo.processInfo().operatingSystemVersion
+    assert((version.majorVersion == 8 && version.minorVersion >= 3) || version.majorVersion >= 9, "Test should be run")
+    self._runner = RCTTestRunner.init(app: "ios/koshianIntegrationTests/js/IntegrationTestsApp", referenceDirectory: FB_REFERENCE_IMAGE_DIR, moduleProvider: nil)
+    self._runner!.recordMode = true
+  }
+  
+  override func tearDown() {
+    super.tearDown()
+  }
+  
+  func RCT_TEST(name: String) {
+    self._runner!.runTest(__FUNCTION__, module: name)
+  }
+  
+  func testTheTester_waitOneFrame() {
+    self._runner!.runTest(__FUNCTION__, module: "IntegrationTestHarnessTest", initialProps: ["waitOneFrame": true], expectErrorBlock: {(dummy) -> Bool in true})
+  }
+  
+  func testTheTester_ExpectError() {
+    self._runner!.runTest(__FUNCTION__, module: "IntegrationTestHarnessTest", initialProps: ["shouldThrows": true], expectErrorRegex: "because shouldThrows")
+  }
+  
+  func testIntegrationTestHarnessTest() {
+    RCT_TEST("IntegrationTestHarnessTest")
+  }
+  
+  func testKeyboardChangeButtonsTest() {
+    RCT_TEST("KeyboardChangeButtonsTest")
+  }
 }

@@ -31,3 +31,5 @@ coverage/
 dist/
 doc/
 .eslintcache
+
+ios/koshianIntegrationTests/jsBuild/
