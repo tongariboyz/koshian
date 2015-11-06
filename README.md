@@ -17,9 +17,6 @@ Koshian is [toggl](https://toggl.com/) client.
 
 - **Requirements**
   * Install Node.js 4.0 or newer.
-  * Install npm v2.14.7
-    * In the case React-Native v0.11.x
-    * [React Dev Tools doesnot work v0.12.x or newer](https://github.com/facebook/react-native/issues/3373)
   * Install watchman newer
 
 - **iOS Setup**
