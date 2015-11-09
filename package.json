@@ -63,6 +63,7 @@
     "test:coverage": "babel-node $(npm bin)/isparta cover --report text --report html --report lcovonly _mocha -- test/**/*spec.js",
     "watch": "npm-run-all --parallel watch:*",
     "watch:flow": "flow & chokidar src/ -c flow",
+    "watch:lint": "chokidar src/ test/ -c 'npm run -s lint'",
     "watch:src": "babel --out-dir dist --watch src",
     "watch:test": "mocha --watch test/**/*spec.js"
   }
