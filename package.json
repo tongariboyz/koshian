@@ -52,7 +52,7 @@
     "codecov": "cat coverage/lcov.info | codecov",
     "doc": "esdoc -c esdoc.json",
     "stop-flow": "flow stop",
-    "lint": "eslint {src,test}",
+    "lint": "eslint --cache {src,test}",
     "packager": "node_modules/react-native/packager/packager.sh",
     "prepackager": "npm run build",
     "prebuild": "rm -rf dist",

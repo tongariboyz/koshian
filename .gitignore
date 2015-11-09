@@ -30,3 +30,4 @@ npm-debug.log
 coverage/
 dist/
 doc/
+.eslintcache
