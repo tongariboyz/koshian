@@ -46,16 +46,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "koshianTests.xctest"
-               BlueprintName = "koshianTests"
-               ReferencedContainer = "container:koshian.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "BD31D0111BEA06580025D2DE"
                BuildableName = "koshianIntegrationTests.xctest"
                BlueprintName = "koshianIntegrationTests"

@@ -24,7 +24,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		BD293F261BEB64430024C1B1 /* libRCTTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD293F251BEB64270024C1B1 /* libRCTTest.a */; };
 		BD31D0151BEA06580025D2DE /* koshianIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD31D0141BEA06580025D2DE /* koshianIntegrationTests.swift */; };
-		BD9D1DEC1BEB67050009A50F /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		BD3D4EF61BF1CEC40029EC98 /* koshianSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3D4EF51BF1CEC40029EC98 /* koshianSnapshotTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +147,7 @@
 		BD31D0121BEA06580025D2DE /* koshianIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = koshianIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD31D0141BEA06580025D2DE /* koshianIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = koshianIntegrationTests.swift; sourceTree = "<group>"; };
 		BD31D0161BEA06580025D2DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD3D4EF51BF1CEC40029EC98 /* koshianSnapshotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = koshianSnapshotTests.swift; sourceTree = "<group>"; };
 		BDBFCC931BEA46FB0035C6CF /* koshianIntegrationTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "koshianIntegrationTests-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,7 +180,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD9D1DEC1BEB67050009A50F /* libReact.a in Frameworks */,
 				BD293F261BEB64430024C1B1 /* libRCTTest.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +350,7 @@
 		BD31D0131BEA06580025D2DE /* koshianIntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
+				BD3D4EF51BF1CEC40029EC98 /* koshianSnapshotTests.swift */,
 				BD31D0141BEA06580025D2DE /* koshianIntegrationTests.swift */,
 				BD31D0161BEA06580025D2DE /* Info.plist */,
 				BDBFCC931BEA46FB0035C6CF /* koshianIntegrationTests-Bridging-Header.h */,
@@ -620,7 +621,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "../node_modules/react-native/packager/react-native-xcode.sh";
-			showEnvVarsInLog = 1;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -647,6 +647,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD31D0151BEA06580025D2DE /* koshianIntegrationTests.swift in Sources */,
+				BD3D4EF61BF1CEC40029EC98 /* koshianSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,6 +842,11 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"FB_REFERENCE_IMAGE_DIR=\"\\\"$(SOURCE_ROOT)/$(PROJECT_NAME)IntegrationTests/ReferenceImages\\\"\"",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -850,6 +856,7 @@
 				INFOPLIST_FILE = koshianIntegrationTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.koshianIntegrationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

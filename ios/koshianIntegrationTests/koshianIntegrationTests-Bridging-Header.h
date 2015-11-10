@@ -13,5 +13,7 @@
 #import "RCTRootView.h"
 #import <RCTTest/RCTTestRunner.h>
 #import "RCTAssert.h"
+#import "RCTRedBox.h"
+#import "RCTRootView.h"
 
 #endif /* koshianIntegrationTests_Bridging_Header_h */
