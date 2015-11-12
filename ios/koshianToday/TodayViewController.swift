@@ -11,6 +11,8 @@ import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
         
+    @IBOutlet weak var openButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
@@ -31,4 +33,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         completionHandler(NCUpdateResult.NewData)
     }
     
+    @IBAction func touchOpenButton(sender: UIButton) {
+      let scheme = NSURL(string: "koshian://")
+      self.extensionContext!.openURL(scheme!, completionHandler: nil)
+    }
 }
