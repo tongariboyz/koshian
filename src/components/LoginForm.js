@@ -68,7 +68,6 @@ export default class LoginForm extends React.Component {
     this.onChangeText.bind(this);
     this.onEndEditing.bind(this);
     this.onFocus.bind(this);
-    this.onPress.bind(this);
     this.onPressLogin.bind(this);
     this.onScroll.bind(this);
     this.onTouchEnd.bind(this);

@@ -61,10 +61,12 @@
     "start": "npm-run-all --parallel packager watch:*",
     "test": "npm-run-all lint test:*",
     "test:coverage": "babel-node $(npm bin)/isparta cover --report text --report html --report lcovonly _mocha -- test/**/*spec.js",
+    "test:ios": "babel --out-dir ios/koshianIntegrationTests/jsBuild ios/koshianIntegrationTests/js",
     "watch": "npm-run-all --parallel watch:*",
     "watch:flow": "flow & chokidar src/ -c flow",
     "watch:lint": "chokidar src/ test/ -c 'npm run -s lint'",
     "watch:src": "babel --out-dir dist --watch src",
+    "watch:ios-test": "babel --out-dir ios/koshianIntegrationTests/jsBuild --watch ios/koshianIntegrationTests/js",
     "watch:test": "mocha --watch test/**/*spec.js"
   }
 }
