@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Today View Controller-->
@@ -15,13 +14,27 @@
                         <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="67"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yiz-bo-VtK">
-                                <rect key="frame" x="17" y="8" width="38" height="21"/>
+                                <rect key="frame" x="135" y="8" width="50" height="50"/>
                                 <animations/>
-                                <state key="normal" title="Open"/>
+                                <color key="backgroundColor" red="0.3411764705882353" green="0.29411764705882354" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="aNR-DZ-ufm"/>
+                                    <constraint firstAttribute="height" constant="50" id="wpF-6Q-9q6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="こ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="touchOpenButton:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="U16-H9-IeY"/>
                                 </connections>
@@ -29,9 +42,8 @@
                         </subviews>
                         <animations/>
                         <constraints>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="Yiz-bo-VtK" secondAttribute="bottom" constant="8" symbolic="YES" id="cOo-UL-3iz"/>
+                            <constraint firstItem="Yiz-bo-VtK" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="aHP-K6-0Sa"/>
                             <constraint firstItem="Yiz-bo-VtK" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" symbolic="YES" id="kEn-Ks-qbm"/>
-                            <constraint firstItem="Yiz-bo-VtK" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" constant="1" id="xvz-K3-oZp"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -39,7 +51,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="37"/>
+                    <size key="freeformSize" width="320" height="67"/>
                     <connections>
                         <outlet property="openButton" destination="Yiz-bo-VtK" id="CpA-gY-Omd"/>
                     </connections>

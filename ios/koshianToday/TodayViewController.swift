@@ -32,7 +32,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
         completionHandler(NCUpdateResult.NewData)
     }
-    
+
+    // Today Extension にデフォルトで入る右余白をゼロにする
+    func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+        return  UIEdgeInsetsZero
+    }
+
     @IBAction func touchOpenButton(sender: UIButton) {
       let scheme = NSURL(string: "koshian://")
       self.extensionContext!.openURL(scheme!, completionHandler: nil)
