@@ -1,6 +1,22 @@
 machine:
   node:
     version: 4.1
+  xcode:
+    version: 7.0
 test:
+  override:
+    - npm test
+    - set -o pipefail &&
+      xcodebuild
+        CODE_SIGNING_REQUIRED=NO
+        CODE_SIGN_IDENTITY=
+        PROVISIONING_PROFILE=
+        -sdk iphonesimulator
+        -destination 'platform=iOS Simulator,OS=9.0,name=iPhone 6'
+        -project ios/koshian.xcodeproj
+        -scheme "koshian"
+        clean build test |
+      tee $CIRCLE_ARTIFACTS/xcode_raw.log |
+      xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
   post:
     - npm run codecov
