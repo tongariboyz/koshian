@@ -2,7 +2,6 @@ import React from 'react-native';
 import IntegrationTestHarnessTest from './IntegrationTestHarnessTest';
 import KeyboardChangeButtonsTest from './KeyboardChangeButtonsTest';
 import LoginFormSnapshotTest from './LoginFormSnapshotTest';
-import SimpleSnapshotTest from './SimpleSnapshotTest';
 
 const {
   AppRegistry,
@@ -16,8 +15,7 @@ const {
 const TESTS = [
   IntegrationTestHarnessTest,
   KeyboardChangeButtonsTest,
-  LoginFormSnapshotTest,
-  SimpleSnapshotTest
+  LoginFormSnapshotTest
 ];
 
 TESTS.forEach(test => {

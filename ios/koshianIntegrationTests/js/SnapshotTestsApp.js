@@ -1,6 +1,5 @@
 import React from 'react-native';
 import LoginFormSnapshotTest from './LoginFormSnapshotTest';
-import SimpleSnapshotTest from './SimpleSnapshotTest';
 
 const {
   AppRegistry,
@@ -9,7 +8,6 @@ const {
 
 const TESTS = [
   LoginFormSnapshotTest,
-  SimpleSnapshotTest
 ];
 
 TESTS.forEach(test => {
