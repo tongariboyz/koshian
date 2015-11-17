@@ -1,0 +1,29 @@
+sudo: false
+osx_image: xcode7
+language: objective-c
+cache:
+  directories:
+    - node_modules
+    - .nvm
+before_script:
+  - brew reinstall nvm
+  - mkdir -p .nvm
+  - export NVM_DIR="$PWD/.nvm"
+  - source $(brew --prefix nvm)/nvm.sh
+  - nvm install 5
+  - npm install -g react-native-cli
+  - npm install
+script:
+  - npm run build
+  - npm test
+  - xcodebuild
+      CODE_SIGNING_REQUIRED=NO
+      CODE_SIGN_IDENTITY=
+      PROVISIONING_PROFILE=
+      -sdk iphonesimulator
+      -destination 'platform=iOS Simulator,OS=9.0,name=iPhone 6'
+      -project ios/koshian.xcodeproj
+      -scheme koshian
+      clean build test
+after_success:
+  - npm run codecov
