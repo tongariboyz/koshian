@@ -23,5 +23,5 @@ after_success:
   - npm run codecov
   - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./scripts/ios-import-certs.sh || false'
   - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./scripts/ios-download-profiles.sh || false'
-  - 'travis_wait sh [ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./scripts/ios-build-adhoc.sh || false'
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && travis_wait ./scripts/ios-build-adhoc.sh || false'
   - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./scripts/ios-deploy-deploygate.sh || false'
