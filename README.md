@@ -1,6 +1,6 @@
 # こしあん
 
-[![Build Status][circleci-image]][circleci-url]
+[![Build Status][travis-image]][travis-url]
 [![Coverage Status][codecov-image]][codecov-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
 [![DevDependency Status][daviddm-dev-image]][daviddm-dev-url]
@@ -52,8 +52,8 @@ $ npm i
 More detail, see [React Native Debugging Documents](https://facebook.github.io/react-native/docs/debugging.html#content)
 
 
-[circleci-url]: https://circleci.com/gh/tongariboyz/koshian
-[circleci-image]: https://img.shields.io/circleci/project/tongariboyz/koshian/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/tongariboyz/koshian
+[travis-image]: https://img.shields.io/travis/tongariboyz/koshian.svg?style=flat-square
 [daviddm-url]: https://david-dm.org/tongariboyz/koshian
 [daviddm-image]: https://img.shields.io/david/tongariboyz/koshian.svg?style=flat-square
 [daviddm-dev-url]: https://david-dm.org/tongariboyz/koshian#info=devDependencies

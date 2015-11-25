@@ -32,4 +32,6 @@ dist/
 doc/
 .eslintcache
 
+Distribution/
+MobileProvisionings/
 ios/koshianIntegrationTests/jsBuild/
