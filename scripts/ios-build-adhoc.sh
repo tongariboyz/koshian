@@ -10,7 +10,6 @@ APPLE_AUTHORITY_BASE64= \
   ITUNES_CONNECT_PASSWORD= \
   KEY_PASSWORD= \
   bundle exec ipa build \
-    --verbose \
     --project "$XCODE_PROJECT" \
     --scheme "$APPNAME" \
     --configuration Release \
